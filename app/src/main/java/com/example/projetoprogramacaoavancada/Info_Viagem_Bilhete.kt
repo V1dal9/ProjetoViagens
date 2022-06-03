@@ -1,13 +1,12 @@
 package com.example.projetoprogramacaoavancada
 
 import android.content.ContentValues
-import java.sql.Date
 
 class Viagem (
     var id : Long,
     val nome : String,
-    val dataInicio : String,
-    val dataFim : String,
+    val dataInicio : Long,
+    val dataFim : Long,
     val localEmbarque : String,
     val localDesembarque : String
 ){
