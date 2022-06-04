@@ -10,13 +10,13 @@ class Lista_Viagem(
     val acessorios : String,
     val eletronico : String,
     val higiene : String,
-    val calçado : String
+    val calcado : String
 ) {
     fun toContentValues() : ContentValues{
         val valoresLista = ContentValues()
         valoresLista.put(Tabela_Lista_Viagem.NOME_LISTA, nome_lista)
         valoresLista.put(Tabela_Lista_Viagem.ACESSORIO, acessorios)
-        valoresLista.put(Tabela_Lista_Viagem.CALÇADO, calçado)
+        valoresLista.put(Tabela_Lista_Viagem.CALÇADO, calcado)
         valoresLista.put(Tabela_Lista_Viagem.ELETRONICO, eletronico)
         valoresLista.put(Tabela_Lista_Viagem.HIGIENE, higiene)
         valoresLista.put(Tabela_Lista_Viagem.ROUPA, roupa)
