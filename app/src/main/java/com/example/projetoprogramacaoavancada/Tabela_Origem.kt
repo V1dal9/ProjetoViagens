@@ -8,12 +8,13 @@ class Tabela_Origem(db:SQLiteDatabase):TabelaBD(db, NOME_ORIGEM) {
         db.execSQL("CREATE TABLE $nome(${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$NOME_ORIGEM TEXT NOT NULL, " +
                 "$LOCAL_ORIGEM TEXT NOT NULL, " +
-                "FOREIGN KEY($ID_ORIGEM) " +
-                "REFERENCES ${Tabela_Origem})")
+                "FOREIGN KEY($TRAVELO_ID) " +
+                "REFERENCES ${Tabela_Info_Viagem.NOME}(${BaseColumns._ID}))")
     }
     companion object{
         const val ID_ORIGEM = "id"
         const val NOME_ORIGEM = "nome"
         const val LOCAL_ORIGEM = "local"
+        const val TRAVELO_ID = "travel_id"
     }
 }
