@@ -1,12 +1,18 @@
 package com.example.projetoprogramacaoavancada
 
-import android.database.sqlite.SQLiteClosable
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 
-class Tabela_Info_Viagem(db: SQLiteDatabase): TabelaBD(db, NOME) {
+class Tabela_Info_Viagem_Bilhete (db: SQLiteDatabase): TabelaBD(db, Tabela_Info_Viagem_Bilhete.NOME){
     override fun criar(){
-        db.execSQL("CREATE TABLE $nome (${BaseColumns._ID} ON DELETE RESTRICT INTEGER PRIMARY KEY AUTOINCREMENT, $DATA_INICIO LONG NOT NULL, $DATA_FIM LONG NOT NULL, $LOCAL_EMBARQUE TEXT NOT NULL, $LOCAL_DESEMBARQUE TEXT NOT NULL, $CAMPO_ID INTEGRE NOT NULL, FOREIGN KEY($CAMPO_ID) REFERENCES ${Tabela_Info_Viagem})")
+        db.execSQL("CREATE TABLE $nome (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "${Tabela_Info_Viagem_Bilhete.DATA_INICIO} LONG NOT NULL, " +
+                "${Tabela_Info_Viagem_Bilhete.DATA_FIM} LONG NOT NULL, " +
+                "${Tabela_Info_Viagem_Bilhete.LOCAL_EMBARQUE} TEXT NOT NULL, " +
+                "${Tabela_Info_Viagem_Bilhete.LOCAL_DESEMBARQUE} TEXT NOT NULL, " +
+                "${Tabela_Info_Viagem_Bilhete.CAMPO_ID} INTEGRE NOT NULL, " +
+                "FOREIGN KEY(${Tabela_Info_Viagem_Bilhete.CAMPO_ID}) " +
+                "REFERENCES ${Tabela_Info_Viagem_Bilhete})")
     }
     companion object{
         const val NOME = "viagem"
@@ -16,7 +22,4 @@ class Tabela_Info_Viagem(db: SQLiteDatabase): TabelaBD(db, NOME) {
         const val LOCAL_DESEMBARQUE = "localDesembarque"
         const val CAMPO_ID = "infoViagemId"
     }
-
 }
-
-
