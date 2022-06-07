@@ -3,7 +3,7 @@ package com.example.projetoprogramacaoavancada
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 
-abstract class TabelaBD(val db: SQLiteDatabase, val nome: String) {
+abstract  class TabelaBD(val db: SQLiteDatabase, val nome: String) {
     abstract fun criar()
 
     fun insert(values: ContentValues) =
