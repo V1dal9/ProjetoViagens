@@ -80,4 +80,15 @@ class BDTeste {
     private fun inserirListaViagem(db : SQLiteDatabase, listaViagem: Lista_Viagem){
         listaViagem.id = TabelaListaViagem(db).insert(listaViagem.toContentValues())
     }
+
+    @Test
+    fun consegueInfoViagemBilhete(){
+        val db = getWritableDataBase()
+        inserirInfoViagem(db, InfoViagemBilhete(0, "Ana", 24, 4, "Portugal", "Barcelona"))
+        db.close()
+    }
+
+    private fun inserirInfoViagem(db : SQLiteDatabase, infoViagemBilhete: InfoViagemBilhete){
+        Tabela_Info_Viagem_Bilhete(db).insert(infoViagemBilhete.toContentValues())
+    }
 }
