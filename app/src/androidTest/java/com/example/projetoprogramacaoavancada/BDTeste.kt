@@ -50,7 +50,7 @@ class BDTeste {
     private fun inserirCompanhiaViagem(db : SQLiteDatabase, companhiaviagem: Companhia_Viagem ){
         companhiaviagem.id = Tabela_Companhia_Viagem(db).insert(companhiaviagem.toContenteValues())
 
-        //assertNotEquals(-1, companhiaviagem.id)
+
     }
 
     private fun getWritableDataBase(): SQLiteDatabase {
@@ -65,5 +65,19 @@ class BDTeste {
         inserirCompanhiaViagem(db, Companhia_Viagem(0,"TAP"))
 
         db.close()
+    }
+
+    @Test
+    fun consegueInserirListaViagem(){
+        val db = getWritableDataBase()
+
+        inserirListaViagem(db, Lista_Viagem(0,"Portugal", "S", "S", "S", "S", "S"))
+
+        db.close()
+
+    }
+
+    private fun inserirListaViagem(db : SQLiteDatabase, listaViagem: Lista_Viagem){
+        listaViagem.id = TabelaListaViagem(db).insert(listaViagem.toContentValues())
     }
 }
