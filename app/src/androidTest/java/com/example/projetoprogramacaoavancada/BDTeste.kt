@@ -82,7 +82,7 @@ class BDTeste {
     }
 
     @Test
-    fun consegueInfoViagemBilhete(){
+    fun consegueInserirInfoViagemBilhete(){
         val db = getWritableDataBase()
         inserirInfoViagem(db, InfoViagemBilhete(0, "Ana", 24, 4, "Portugal", "Barcelona"))
         db.close()
@@ -90,5 +90,17 @@ class BDTeste {
 
     private fun inserirInfoViagem(db : SQLiteDatabase, infoViagemBilhete: InfoViagemBilhete){
         Tabela_Info_Viagem_Bilhete(db).insert(infoViagemBilhete.toContentValues())
+    }
+
+    @Test
+    fun consegueInserirOrigem(){
+        val db = getWritableDataBase()
+        inserirOrigem(db, Origem(0, "Portugal"))
+        db.close()
+    }
+
+    private fun inserirOrigem(db : SQLiteDatabase, origem: Origem){
+        TabelaOrigem(db).insert(origem.toContentValues())
+
     }
 }
