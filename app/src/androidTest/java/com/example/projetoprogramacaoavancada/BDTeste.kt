@@ -101,6 +101,16 @@ class BDTeste {
 
     private fun inserirOrigem(db : SQLiteDatabase, origem: Origem){
         TabelaOrigem(db).insert(origem.toContentValues())
+    }
 
+    @Test
+    fun consegueInserirDestino(){
+        val db = getWritableDataBase()
+        inserirDestino(db, Destino(0,"Barcelona"))
+        db.close()
+    }
+
+    private fun inserirDestino(db : SQLiteDatabase, destino: Destino){
+        Tabela_Destino(db).insert(destino.toContentValues())
     }
 }
