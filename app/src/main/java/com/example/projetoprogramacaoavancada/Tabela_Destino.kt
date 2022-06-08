@@ -8,8 +8,8 @@ class Tabela_Destino(db : SQLiteDatabase): TabelaBD(db, NOME_DESTINO) {
     db.execSQL("CREATE TABLE $nome(${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "$NOME_DESTINO TEXT NOT NULL, " +
             "$LOCAL_DESTINO TEXT NOT NULL, " +
-            "$TRAVELD_ID NOT NULL, " +
-            "FOREIGN KEY($TRAVELD_ID) REFERENCES ${Tabela_Info_Viagem.NOME}(${BaseColumns._ID})" +
+            "$TRAVELD_ID INTEGER NOT NULL, " +
+            "FOREIGN KEY($TRAVELD_ID) REFERENCES ${Tabela_Info_Viagem_Bilhete.NOME}(${BaseColumns._ID})" +
             ")")
     }
     companion object{

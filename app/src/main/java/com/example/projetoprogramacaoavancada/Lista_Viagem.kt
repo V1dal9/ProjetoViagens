@@ -14,13 +14,13 @@ class Lista_Viagem(
 ) {
     fun toContentValues() : ContentValues{
         val valoresLista = ContentValues()
-        valoresLista.put(Tabela_Lista_Viagem.NOME_LISTA, nome_lista)
-        valoresLista.put(Tabela_Lista_Viagem.ACESSORIO, acessorios)
-        valoresLista.put(Tabela_Lista_Viagem.CALÇADO, calcado)
-        valoresLista.put(Tabela_Lista_Viagem.ELETRONICO, eletronico)
-        valoresLista.put(Tabela_Lista_Viagem.HIGIENE, higiene)
-        valoresLista.put(Tabela_Lista_Viagem.ROUPA, roupa)
-        valoresLista.put(Tabela_Lista_Viagem.ID_LISTA, id)
+        valoresLista.put(TabelaListaViagem.NOME, nome_lista)
+        valoresLista.put(TabelaListaViagem.ACESSORIO, acessorios)
+        valoresLista.put(TabelaListaViagem.CALCADO, calcado)
+        valoresLista.put(TabelaListaViagem.ELETRONICO, eletronico)
+        valoresLista.put(TabelaListaViagem.HIGIENE, higiene)
+        valoresLista.put(TabelaListaViagem.ROUPA, roupa)
+        valoresLista.put(TabelaListaViagem.ID_LISTA, id)
         return valoresLista
 
     }

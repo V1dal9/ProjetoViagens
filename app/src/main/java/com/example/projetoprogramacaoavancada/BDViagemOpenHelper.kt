@@ -8,11 +8,12 @@ class BDViagemOpenHelper(context: Context?) : SQLiteOpenHelper(context, NOME, nu
     override fun onCreate(db: SQLiteDatabase?) {
         requireNotNull(db)
         Tabela_Destino(db).criar()
-        Tabela_Origem(db).criar()
-        Tabela_Lista_Viagem(db).criar()
+        TabelaOrigem(db).criar()
+        TabelaListaViagem(db).criar()
         Tabela_Companhia_Viagem(db).criar()
         Tabela_Passageiro(db).criar()
-        Tabela_Info_Viagem(db).criar()
+        Tabela_Info_Viagem_Bilhete(db).criar()
+
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {

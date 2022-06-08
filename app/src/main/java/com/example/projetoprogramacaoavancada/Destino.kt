@@ -9,9 +9,9 @@ class Destino(
 ) {
     fun toContentValues() : ContentValues {
         val valoresDestino = ContentValues()
-        valoresDestino.put(Tabela_Origem.ID_ORIGEM, id)
-        valoresDestino.put(Tabela_Origem.NOME_ORIGEM, nome)
-        valoresDestino.put(Tabela_Origem.LOCAL_ORIGEM, local)
+        valoresDestino.put(Tabela_Destino.ID_DESTINO, id)
+        valoresDestino.put(Tabela_Destino.NOME_DESTINO, nome)
+        valoresDestino.put(Tabela_Destino.LOCAL_DESTINO, local)
         return valoresDestino
     }
 }
