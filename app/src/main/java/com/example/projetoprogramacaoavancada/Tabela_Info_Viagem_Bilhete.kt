@@ -6,10 +6,10 @@ import android.provider.BaseColumns
 class Tabela_Info_Viagem_Bilhete (db: SQLiteDatabase): TabelaBD(db, Tabela_Info_Viagem_Bilhete.NOME){
     override fun criar(){
         db.execSQL("CREATE TABLE $nome (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "${Tabela_Info_Viagem_Bilhete.DATA_INICIO} LONG NOT NULL, " +
-                "${Tabela_Info_Viagem_Bilhete.DATA_FIM} LONG NOT NULL, " +
-                "${Tabela_Info_Viagem_Bilhete.LOCAL_EMBARQUE} TEXT NOT NULL, " +
-                "${Tabela_Info_Viagem_Bilhete.LOCAL_DESEMBARQUE} TEXT NOT NULL, " +
+                "${Tabela_Info_Viagem_Bilhete.DATA_INICIO} REAL NOT NULL, " +
+                "${Tabela_Info_Viagem_Bilhete.DATA_FIM} REAL NOT NULL, " +
+                "${Tabela_Info_Viagem_Bilhete.LOCAL_EMBARQUE} REAL NOT NULL, " +
+                "${Tabela_Info_Viagem_Bilhete.LOCAL_DESEMBARQUE} REAL NOT NULL, " +
                 "${Tabela_Info_Viagem_Bilhete.PASSAGEIRO_ID} INTEGER NOT NULL, " +
                 "${Tabela_Info_Viagem_Bilhete.CAMPO_ID} INTEGRE NOT NULL, " +
                 "FOREIGN KEY(${Tabela_Info_Viagem_Bilhete.PASSAGEIRO_ID}) " +

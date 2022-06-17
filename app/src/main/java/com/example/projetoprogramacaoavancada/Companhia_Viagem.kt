@@ -4,7 +4,7 @@ import android.content.ContentValues
 
 class Companhia_Viagem(
     var id : Long,
-    val nome : String
+    var nome : String
 ) {
     fun toContenteValues() : ContentValues{
         val valores = ContentValues()

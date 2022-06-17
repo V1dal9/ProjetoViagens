@@ -2,6 +2,7 @@ package com.example.projetoprogramacaoavancada
 
 
 import android.database.sqlite.SQLiteDatabase
+import android.provider.BaseColumns
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert.*
@@ -49,8 +50,6 @@ class BDTeste {
 
     private fun inserirCompanhiaViagem(db : SQLiteDatabase, companhiaviagem: Companhia_Viagem ){
         companhiaviagem.id = Tabela_Companhia_Viagem(db).insert(companhiaviagem.toContenteValues())
-
-
     }
 
     private fun getWritableDataBase(): SQLiteDatabase {
@@ -95,22 +94,53 @@ class BDTeste {
     @Test
     fun consegueInserirOrigem(){
         val db = getWritableDataBase()
-        inserirOrigem(db, Origem(0, "Portugal"))
+        inserirOrigem(db, Local(0, "Portugal", "Madeira"))
         db.close()
     }
 
-    private fun inserirOrigem(db : SQLiteDatabase, origem: Origem){
-        TabelaOrigem(db).insert(origem.toContentValues())
+    private fun inserirOrigem(db : SQLiteDatabase, local: Local){
+        TabelaLocal(db).insert(local.toContentValues())
     }
 
     @Test
     fun consegueInserirDestino(){
         val db = getWritableDataBase()
-        inserirDestino(db, Destino(0,"Barcelona"))
+        inserirDestino(db, LocalViagem(0,"Barcelona"))
         db.close()
     }
 
-    private fun inserirDestino(db : SQLiteDatabase, destino: Destino){
-        Tabela_Destino(db).insert(destino.toContentValues())
+    private fun inserirDestino(db : SQLiteDatabase, localViagem: LocalViagem){
+        TabelaLocalViagem(db).insert(localViagem.toContentValues())
+    }
+
+    @Test
+    fun consegueAlterarCompanhiaViagem(){
+        val db = getWritableDataBase()
+
+        val companhiaviagem = Companhia_Viagem(0,"Ana")
+        inserirCompanhiaViagem(db, companhiaviagem)
+
+        companhiaviagem.nome = "Ana Raquel"
+
+        val registosAlterados = Tabela_Companhia_Viagem(db).update(
+            companhiaviagem.toContenteValues(),
+            "${BaseColumns._ID} = ?",
+            arrayOf("${companhiaviagem.id}")
+        )
+        assertEquals(1, registosAlterados)
+
+        db.close()
+    }
+
+    @Test
+    fun consegueAlterarPassageiro(){
+        val db = getWritableDataBase()
+
+        val passageiroRaquel = Passageiro(0, "Raquel", "F", 22)
+        inserirPassageiro(db, passageiroRaquel)
+
+        val passageiroAna = Passageiro(0, "Ana", "F", 20)
+        inserirPassageiro(db, passageiroAna)
+
     }
 }
