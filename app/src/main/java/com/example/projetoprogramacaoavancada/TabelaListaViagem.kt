@@ -1,30 +1,55 @@
 package com.example.projetoprogramacaoavancada
 
+import android.database.Cursor
 import android.provider.BaseColumns
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteQueryBuilder
+import java.util.concurrent.atomic.AtomicLongArray
 
 
 class TabelaListaViagem (db:SQLiteDatabase):TabelaBD(db, NOME) {
-    override fun criar() {
-        db.execSQL("CREATE TABLE $nome(${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "$NOME TEXT, " +
+    override fun cria() {
+        db.execSQL("CREATE TABLE $nome(${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "$ID_LISTA LONG, " +
+                "$CAMPO_NOME TEXT, " +
                 "$ROUPA TEXT, " +
                 "$CALCADO TEXT, " +
                 "$ACESSORIO TEXT, " +
                 "$ELETRONICO TEXT, " +
                 "$HIGIENE TEXT, " +
                 "$PASSAGEIRO_ID INTEGER, " +
-                "FOREIGN KEY ($PASSAGEIRO_ID) " +
-                "REFERENCES ${Tabela_Passageiro.NOME}(${BaseColumns._ID}))")
+                "$INFOVIAGEM_ID INTEGER, " +
+                "FOREIGN KEY ($PASSAGEIRO_ID) REFERENCES ${Tabela_Passageiro.NOME}(${BaseColumns._ID})ON DELETE RESTRICT," +
+                "FOREIGN KEY ($INFOVIAGEM_ID) REFERENCES ${Tabela_Info_Viagem_Bilhete.NOME}(${BaseColumns._ID})ON DELETE RESTRICT)")
     }
+
+    override fun query(
+        columns: Array<String>,
+        selection: String?,
+        selectionArgs: Array<String>?,
+        groupBy: String?,
+        having: String?,
+        orderBy: String?
+    ): Cursor {
+        val queryBuilder = SQLiteQueryBuilder()
+        queryBuilder.tables = "$NOME INNER JOIN ${Tabela_Passageiro.NOME} ON ${Tabela_Passageiro.ID_PASSAGEIRO} = $PASSAGEIRO_ID"
+        queryBuilder.tables = "$NOME INNER JOIN ${Tabela_Info_Viagem_Bilhete.NOME} ON ${Tabela_Info_Viagem_Bilhete.CAMPO_ID} = $INFOVIAGEM_ID"
+        return queryBuilder.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
+    }
+
     companion object{
+        const val NOME = "ListaViagem"
+
         const val ID_LISTA = "id"
-        const val NOME = "nome"
+        const val CAMPO_NOME = "nome"
         const val ROUPA = "roupas"
         const val CALCADO = "calçados"
-        const val ACESSORIO = "acessórios"
-        const val ELETRONICO = "utencilios informaticos"
-        const val HIGIENE = "produtos higienicos"
-        const val PASSAGEIRO_ID = "passageiroID"
+        const val ACESSORIO = "accessories"
+        const val ELETRONICO = "utensils informatics"
+        const val HIGIENE = "products hygienics"
+        const val PASSAGEIRO_ID  = "passageiroID"
+        const val INFOVIAGEM_ID = "infoviagemID"
+
+        val TODAS_COLUNAS = arrayOf(ID_LISTA, CAMPO_NOME, ROUPA, CALCADO, ACESSORIO, ELETRONICO, HIGIENE, PASSAGEIRO_ID, INFOVIAGEM_ID)
     }
 }
