@@ -9,7 +9,7 @@ class LocalViagem(
     fun toContentValues() : ContentValues {
         val valoresLocal = ContentValues()
         valoresLocal.put(Tabela_Info_Viagem_Bilhete.CAMPO_ID, idViagem)
-        valoresLocal.put(TabelaLocal.ID_LOCAL, idLocal)
+        valoresLocal.put(TabelaLocal.LOCAL_ID, idLocal)
         return valoresLocal
     }
 }

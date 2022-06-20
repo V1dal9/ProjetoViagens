@@ -7,12 +7,12 @@ import android.database.sqlite.SQLiteOpenHelper
 class BDViagemOpenHelper(context: Context?) : SQLiteOpenHelper(context, NOME, null, VERSAO) {
     override fun onCreate(db: SQLiteDatabase?) {
         requireNotNull(db)
-        TabelaLocalViagem(db).criar()
-        TabelaLocal(db).criar()
-        TabelaListaViagem(db).criar()
-        Tabela_Companhia_Viagem(db).criar()
-        Tabela_Passageiro(db).criar()
-        Tabela_Info_Viagem_Bilhete(db).criar()
+        TabelaLocalViagem(db).cria()
+        TabelaLocal(db).cria()
+        TabelaListaViagem(db).cria()
+        Tabela_Companhia_Viagem(db).cria()
+        Tabela_Passageiro(db).cria()
+        Tabela_Info_Viagem_Bilhete(db).cria()
 
     }
 

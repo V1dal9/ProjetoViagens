@@ -4,7 +4,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 
 class TabelaLocal (db: SQLiteDatabase):TabelaBD(db, NOME_LOCAL) {
-    override fun criar() {
+    override fun cria() {
         db.execSQL("CREATE TABLE $nome(${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$NOME_LOCAL TEXT NOT NULL, " +
                 "$LOCAL_ORIGEM TEXT NOT NULL, " +
