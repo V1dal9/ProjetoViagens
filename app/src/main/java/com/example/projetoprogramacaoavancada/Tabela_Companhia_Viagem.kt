@@ -13,8 +13,7 @@ class Tabela_Companhia_Viagem(db: SQLiteDatabase): TabelaBD(db, NOME) {
                 "FOREIGN KEY($PASSAGEIRO_ID) REFERENCES ${Tabela_Passageiro.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
     }
 
-    override fun queryBuilder(
-        db: SQLiteDatabase,
+    override fun query(
         columns: Array<String>,
         selection: String?,
         selectionArgs: Array<String>?,
@@ -25,7 +24,7 @@ class Tabela_Companhia_Viagem(db: SQLiteDatabase): TabelaBD(db, NOME) {
         val queryBuilder = SQLiteQueryBuilder()
         queryBuilder.tables = "$NOME INNER JOIN ${Tabela_Passageiro.NOME} ON ${Tabela_Passageiro.ID_PASSAGEIRO} = $PASSAGEIRO_ID"
 
-        return queryBuilder(db, columns, selection, selectionArgs, groupBy, having, orderBy)
+        return queryBuilder.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
 
     }
 

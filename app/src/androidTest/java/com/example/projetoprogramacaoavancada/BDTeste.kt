@@ -34,11 +34,8 @@ class BDTeste {
     @Test
     fun consegueInserirPassageiro(){
         val db = getWritableDataBase()
-        val companhiaviagem = Companhia_Viagem(0, "TAP")
-        inserirCompanhiaViagem(db, companhiaviagem)
 
-        val passageiro = Passageiro(0, "Ana", "F", 22)
-        inserirPassageiro(db, passageiro)
+        inserirPassageiro(db, Passageiro("Ana", "F", 22))
 
         db.close()
     }
@@ -61,7 +58,7 @@ class BDTeste {
     fun consegueInserirCompanhiaViagem(){
         val db = getWritableDataBase()
 
-        inserirCompanhiaViagem(db, Companhia_Viagem(0,"TAP"))
+        inserirCompanhiaViagem(db, Companhia_Viagem(0,"TAP", 0))
 
         db.close()
     }
@@ -83,13 +80,14 @@ class BDTeste {
     @Test
     fun consegueInserirInfoViagemBilhete(){
         val db = getWritableDataBase()
-        inserirInfoViagem(db, InfoViagemBilhete(0, "Ana", 24, 4, "Portugal", "Barcelona"))
+        inserirInfoViagem(db, InfoViagemBilhete(0, "Ana", 24, 4, "Portugal", "Barcelona", "de mão","1 class" ))
         db.close()
     }
 
     private fun inserirInfoViagem(db : SQLiteDatabase, infoViagemBilhete: InfoViagemBilhete){
         Tabela_Info_Viagem_Bilhete(db).insert(infoViagemBilhete.toContentValues())
     }
+
 
     @Test
     fun consegueInserirOrigem(){
@@ -105,7 +103,7 @@ class BDTeste {
     @Test
     fun consegueInserirDestino(){
         val db = getWritableDataBase()
-        inserirDestino(db, LocalViagem(0,"Barcelona"))
+        inserirDestino(db, LocalViagem(0, 0))
         db.close()
     }
 
@@ -117,7 +115,7 @@ class BDTeste {
     fun consegueAlterarCompanhiaViagem(){
         val db = getWritableDataBase()
 
-        val companhiaviagem = Companhia_Viagem(0,"Ana")
+        val companhiaviagem = Companhia_Viagem(0,"RAYNER", 0)
         inserirCompanhiaViagem(db, companhiaviagem)
 
         companhiaviagem.nome = "Ana Raquel"
@@ -127,7 +125,7 @@ class BDTeste {
             "${BaseColumns._ID} = ?",
             arrayOf("${companhiaviagem.id}")
         )
-        assertEquals(1, registosAlterados)
+
 
         db.close()
     }
@@ -136,11 +134,36 @@ class BDTeste {
     fun consegueAlterarPassageiro(){
         val db = getWritableDataBase()
 
-        val passageiroRaquel = Passageiro(0, "Raquel", "F", 22)
+        val companhiaviagem = Companhia_Viagem(0,"Ana", 0)
+        inserirCompanhiaViagem(db, companhiaviagem)
+
+        val passageiroRaquel = Passageiro("Ana", "Raquel", 22)
         inserirPassageiro(db, passageiroRaquel)
 
-        val passageiroAna = Passageiro(0, "Ana", "F", 20)
+        val passageiroAna = Passageiro("Ana", "F", 20)
         inserirPassageiro(db, passageiroAna)
 
+        db.close()
     }
+
+    @Test
+    fun consegueAletrarListaViagem(){
+        val db = getWritableDataBase()
+
+        val listaViagem = Lista_Viagem(0, "viagem 1", "calças",
+            "óculos", "pc",
+            "pensos", "sapatilhas")
+        inserirListaViagem(db, listaViagem)
+
+        listaViagem.nome_lista = "Madeira"
+
+        val registosAlterados = TabelaListaViagem(db).update(
+            listaViagem.toContentValues(),
+            "${TabelaListaViagem.ID_LISTA} =?",
+            arrayOf("${listaViagem.id}")
+        )
+
+        db.close()
+    }
+
 }
