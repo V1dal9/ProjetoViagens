@@ -1,27 +1,50 @@
 package com.example.projetoprogramacaoavancada
 
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteQueryBuilder
 import android.provider.BaseColumns
 
 class Tabela_Info_Viagem_Bilhete (db: SQLiteDatabase): TabelaBD(db, Tabela_Info_Viagem_Bilhete.NOME){
-    override fun criar(){
+    override fun cria(){
         db.execSQL("CREATE TABLE $nome (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "${Tabela_Info_Viagem_Bilhete.DATA_INICIO} REAL NOT NULL, " +
-                "${Tabela_Info_Viagem_Bilhete.DATA_FIM} REAL NOT NULL, " +
-                "${Tabela_Info_Viagem_Bilhete.LOCAL_EMBARQUE} REAL NOT NULL, " +
-                "${Tabela_Info_Viagem_Bilhete.LOCAL_DESEMBARQUE} REAL NOT NULL, " +
-                "${Tabela_Info_Viagem_Bilhete.PASSAGEIRO_ID} INTEGER NOT NULL, " +
-                "${Tabela_Info_Viagem_Bilhete.CAMPO_ID} INTEGRE NOT NULL, " +
-                "FOREIGN KEY(${Tabela_Info_Viagem_Bilhete.PASSAGEIRO_ID}) " +
-                "REFERENCES ${Tabela_Passageiro.NOME}(${BaseColumns._ID}))")
+                "$DATA_INICIO REAL NOT NULL, " +
+                "$DATA_FIM REAL NOT NULL, " +
+                "$LOCAL_ORIGEM TEXT NOT NULL, " +
+                "$LOCAL_DESTINO TEXT NOT NULL, " +
+                "$PASSAGEIRO_ID INTEGER NOT NULL, " +
+                "$TIPO_MALA TEXT NOT NULL, " +
+                "${CLASS_VIAGEM} TEXT NOT NULL " +
+                "FOREIGN KEY(${PASSAGEIRO_ID}) " +
+                "REFERENCES ${Tabela_Passageiro.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
     }
+
+    override fun query(
+        columns: Array<String>,
+        selection: String?,
+        selectionArgs: Array<String>?,
+        groupBy: String?,
+        having: String?,
+        orderBy: String?
+    ): Cursor {
+        val queryBuilder = SQLiteQueryBuilder()
+
+        queryBuilder.tables = "$NOME INNER JOIN ${Tabela_Passageiro.NOME} ON ${Tabela_Passageiro.ID_PASSAGEIRO} = $PASSAGEIRO_ID"
+        return queryBuilder.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
+    }
+
     companion object{
-        const val NOME = "viagem"
+        const val NOME = "InfoBilhete"
+
         const val DATA_INICIO = "dataInicio"
         const val DATA_FIM = "dataFim"
-        const val LOCAL_EMBARQUE = "localEmbarque"
-        const val LOCAL_DESEMBARQUE = "localDesembarque"
-        const val CAMPO_ID = "infoViagemId"
+        const val LOCAL_ORIGEM = "localEmbarque"
+        const val LOCAL_DESTINO = "localDesembarque"
+        const val CAMPO_ID = "$NOME.${BaseColumns._ID}"
+        const val TIPO_MALA = "TipoMala"
+        const val CLASS_VIAGEM = "ClassViage,"
         const val PASSAGEIRO_ID = "passageiroID"
+
+        val TODAS_COLUNAS = arrayOf(DATA_INICIO, DATA_FIM, LOCAL_ORIGEM, LOCAL_DESTINO, CAMPO_ID, PASSAGEIRO_ID)
     }
 }
