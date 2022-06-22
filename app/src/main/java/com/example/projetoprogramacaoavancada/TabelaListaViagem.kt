@@ -4,7 +4,6 @@ import android.database.Cursor
 import android.provider.BaseColumns
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteQueryBuilder
-import java.util.concurrent.atomic.AtomicLongArray
 
 
 class TabelaListaViagem (db:SQLiteDatabase):TabelaBD(db, NOME) {

@@ -67,7 +67,7 @@ class BDTeste {
     fun consegueInserirListaViagem(){
         val db = getWritableDataBase()
 
-        inserirListaViagem(db, Lista_Viagem(0,"Portugal", "S", "S", "S", "S", "S"))
+        inserirListaViagem(db, Lista_Viagem(0,"Portugal", "S", "S", "S", "S", "S", 0, 0))
 
         db.close()
 
@@ -90,26 +90,16 @@ class BDTeste {
 
 
     @Test
-    fun consegueInserirOrigem(){
+    fun consegueInserirLocal(){
         val db = getWritableDataBase()
-        inserirOrigem(db, Local(0, "Portugal", "Madeira"))
+        inserirLocal(db, Local(0, "Lisboa", "Madeira"))
         db.close()
     }
 
-    private fun inserirOrigem(db : SQLiteDatabase, local: Local){
+    private fun inserirLocal(db : SQLiteDatabase, local: Local){
         TabelaLocal(db).insert(local.toContentValues())
     }
 
-    @Test
-    fun consegueInserirDestino(){
-        val db = getWritableDataBase()
-        inserirDestino(db, LocalViagem(0, 0))
-        db.close()
-    }
-
-    private fun inserirDestino(db : SQLiteDatabase, localViagem: LocalViagem){
-        TabelaLocalViagem(db).insert(localViagem.toContentValues())
-    }
 
     @Test
     fun consegueAlterarCompanhiaViagem(){
@@ -122,7 +112,7 @@ class BDTeste {
 
         val registosAlterados = Tabela_Companhia_Viagem(db).update(
             companhiaviagem.toContenteValues(),
-            "${BaseColumns._ID} = ?",
+            "${Tabela_Companhia_Viagem.ID_COMPANHIA} =?",
             arrayOf("${companhiaviagem.id}")
         )
 
@@ -147,12 +137,12 @@ class BDTeste {
     }
 
     @Test
-    fun consegueAletrarListaViagem(){
+    fun consegueAlterarListaViagem(){
         val db = getWritableDataBase()
 
         val listaViagem = Lista_Viagem(0, "viagem 1", "calças",
             "óculos", "pc",
-            "pensos", "sapatilhas")
+            "pensos", "sapatilhas", 0, 0)
         inserirListaViagem(db, listaViagem)
 
         listaViagem.nome_lista = "Madeira"

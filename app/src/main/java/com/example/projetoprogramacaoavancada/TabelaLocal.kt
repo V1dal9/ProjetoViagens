@@ -22,7 +22,7 @@ class TabelaLocal (db: SQLiteDatabase):TabelaBD(db, NOME) {
     ): Cursor {
         val queryBuilder = SQLiteQueryBuilder()
 
-        queryBuilder.tables = "$NOME INNER JOIN ${TabelaLocalViagem.NOME_DESTINO} ON ${TabelaLocalViagem.LOCAL_ID} = $LOCAL_ID"
+        queryBuilder.tables = "$NOME INNER JOIN ${TabelaLocal.NOME} ON ${TabelaLocal.LOCAL_ID} = $LOCAL_ID"
         return queryBuilder.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
     }
     companion object{

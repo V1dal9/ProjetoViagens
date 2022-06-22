@@ -10,7 +10,8 @@ class Tabela_Companhia_Viagem(db: SQLiteDatabase): TabelaBD(db, NOME) {
         db.execSQL("CREATE TABLE $nome (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$PASSAGEIRO_ID INTEGER NOT NULL, "+
                 "$NOME INTEGER NOT NULL, "+
-                "FOREIGN KEY($PASSAGEIRO_ID) REFERENCES ${Tabela_Passageiro.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
+                "FOREIGN KEY($PASSAGEIRO_ID) " +
+                "REFERENCES ${Tabela_Passageiro.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
     }
 
     override fun query(

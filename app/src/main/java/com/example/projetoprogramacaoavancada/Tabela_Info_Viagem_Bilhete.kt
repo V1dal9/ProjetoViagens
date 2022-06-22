@@ -14,7 +14,7 @@ class Tabela_Info_Viagem_Bilhete (db: SQLiteDatabase): TabelaBD(db, Tabela_Info_
                 "$LOCAL_DESTINO TEXT NOT NULL, " +
                 "$PASSAGEIRO_ID INTEGER NOT NULL, " +
                 "$TIPO_MALA TEXT NOT NULL, " +
-                "${CLASS_VIAGEM} TEXT NOT NULL " +
+                "${CLASS_VIAGEM} TEXT NOT NULL, " +
                 "FOREIGN KEY(${PASSAGEIRO_ID}) " +
                 "REFERENCES ${Tabela_Passageiro.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
     }
