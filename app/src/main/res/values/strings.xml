@@ -11,4 +11,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="Viagem">Viagem</string>
     <string name="title_activity_main3">MainActivity3</string>
+    <string name="lista_viagem">Lista Viagem</string>
+    <string name="criar_lista_viagem">Criar Lista Viagem</string>
+    <string name="scoll">"scroll "</string>
 </resources>
