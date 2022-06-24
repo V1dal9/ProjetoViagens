@@ -17,7 +17,7 @@ class AdapterViagem(val fragment: SecondFragment) : RecyclerView.Adapter<Adapter
     }
 
     class ViewHolderViagem(itemViagem : View) : RecyclerView.ViewHolder(itemViagem){
-        val textViewNome = itemViagem.findViewById<TextView>(R.id.textViewNome)
+        //val textViewNome = itemViagem.findViewById<TextView>(R.id)
     }
 
     override fun onBindViewHolder(holder: ViewHolderViagem, position: Int) {
