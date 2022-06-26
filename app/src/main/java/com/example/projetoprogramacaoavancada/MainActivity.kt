@@ -1,7 +1,6 @@
 package com.example.projetoprogramacaoavancada
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -61,8 +60,8 @@ class MainActivity : AppCompatActivity() {
 
         val opcaoProcessada: Boolean
 
-        if (fragment is FirstFragment) {
-            opcaoProcessada = (fragment as FirstFragment).processaOpcaoMenu(item)
+        if (fragment is MenuInicialFragment) {
+            opcaoProcessada = (fragment as MenuInicialFragment).processaOpcaoMenu(item)
         } /*else if (fragment is ListaViagemFragment) {
             opcaoProcessada = (fragment as ListaViagemFragment).processaOpcaoMenu(item)
         } else if (fragment is InserirViagemFragment) {
