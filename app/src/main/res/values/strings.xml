@@ -16,4 +16,5 @@
     <string name="scoll">"scroll "</string>
     <string name="inserir">Inserir</string>
     <string name="edit">Edit</string>
+    <string name="eliminar">eliminar</string>
 </resources>
