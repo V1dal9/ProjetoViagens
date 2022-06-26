@@ -12,14 +12,14 @@ import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.projetoprogramacaoavancada.databinding.FragmentSecondBinding
+import com.example.projetoprogramacaoavancada.databinding.FragmentListaViagemBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class SecondFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
+class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: FragmentListaViagemBinding? = null
     private var adapterViagem : AdapterViagem? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -30,7 +30,7 @@ class SecondFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentListaViagemBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -41,6 +41,7 @@ class SecondFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         adapterViagem = AdapterViagem(this)
         binding.recyclerViewLista.adapter = adapterViagem
         binding.recyclerViewLista.layoutManager = LinearLayoutManager(requireContext())
+
         val activity = activity as MainActivity
         activity.fragment = this
         activity.idMenuAtual = R.menu.menu_main
@@ -62,7 +63,7 @@ class SecondFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
             Tabela_Passageiro.TODAS_COLUNAS,
             null,
             null,
-            "${Tabela_Passageiro}"
+            "${Tabela_Passageiro.CAMPO_NOME}"
         )
     }
 
@@ -80,7 +81,7 @@ class SecondFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
                 findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
                 true
             }
-            R.id.action_edit -> true
+            R.id.action_settings -> true
             R.id.action_eliminar -> true
             else -> false
 
