@@ -37,14 +37,10 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        val navController = findNavController(androidx.navigation.fragment.R.id.nav_host_fragment_container)
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        /*binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -62,11 +58,11 @@ class MainActivity : AppCompatActivity() {
 
         if (fragment is MenuInicialFragment) {
             opcaoProcessada = (fragment as MenuInicialFragment).processaOpcaoMenu(item)
-        } /*else if (fragment is ListaViagemFragment) {
+        } else if (fragment is ListaViagemFragment) {
             opcaoProcessada = (fragment as ListaViagemFragment).processaOpcaoMenu(item)
-        } else if (fragment is InserirViagemFragment) {
-            opcaoProcessada = (fragment as InserirViagemFragment).processaOpcaoMenu(item)
-        }*/ else {
+        }/* else if (fragment is InserirInfoViagemFragment) {
+            opcaoProcessada = (fragment as InserirInfoViagemFragment).processaOpcaoMenu(item)
+        }*/else {
             opcaoProcessada = false
         }
 

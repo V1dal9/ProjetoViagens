@@ -38,6 +38,8 @@ class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        LoaderManager.getInstance(this).initLoader(ID_LOADER_LISTA, null, this)
+
         adapterViagem = AdapterViagem(this)
         binding.recyclerViewLista.adapter = adapterViagem
         binding.recyclerViewLista.layoutManager = LinearLayoutManager(requireContext())
@@ -45,9 +47,6 @@ class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         val activity = activity as MainActivity
         activity.fragment = this
         activity.idMenuAtual = R.menu.menu_main
-        /*binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-        }*/
     }
 
     override fun onDestroyView() {
@@ -82,8 +81,11 @@ class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
                 true
             }
             R.id.action_settings -> true
-            R.id.action_eliminar -> true
+            R.id.action_edit -> true
             else -> false
 
         }
+    companion object{
+        const val ID_LOADER_LISTA = 0
+    }
 }

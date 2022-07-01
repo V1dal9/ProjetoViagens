@@ -5,9 +5,9 @@ import android.database.Cursor
 import android.provider.BaseColumns
 
 class Local(
-    var id: Long = -1,
     val localOrigem: String,
-    val localDestino: String
+    val localDestino: String,
+    var id: Long = -1
 ) {
     fun toContentValues() : ContentValues{
         val valoresLocal = ContentValues()
@@ -27,7 +27,7 @@ class Local(
             val origem = cursor.getString(posOrigem)
             val destino = cursor.getString(posDestino)
 
-            return Local(id, origem, destino)
+            return Local(origem, destino, id)
         }
     }
 }

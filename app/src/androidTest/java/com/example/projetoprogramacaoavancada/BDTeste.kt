@@ -2,7 +2,6 @@ package com.example.projetoprogramacaoavancada
 
 
 import android.database.sqlite.SQLiteDatabase
-import android.provider.BaseColumns
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert.*
@@ -42,11 +41,12 @@ class BDTeste {
 
     private fun inserirPassageiro(db : SQLiteDatabase, passageiro: Passageiro){
         passageiro.id = Tabela_Passageiro(db).insert(passageiro.toContentValues())
-        //assertNotEquals(-1, passageiro.id)
+        assertNotEquals(-1, passageiro.id)
     }
 
     private fun inserirCompanhiaViagem(db : SQLiteDatabase, companhiaviagem: Companhia_Viagem ){
         companhiaviagem.id = Tabela_Companhia_Viagem(db).insert(companhiaviagem.toContenteValues())
+        assertNotEquals(-1, companhiaviagem.id)
     }
 
     private fun getWritableDataBase(): SQLiteDatabase {
@@ -58,7 +58,7 @@ class BDTeste {
     fun consegueInserirCompanhiaViagem(){
         val db = getWritableDataBase()
 
-        inserirCompanhiaViagem(db, Companhia_Viagem(0,"TAP", 0))
+        inserirCompanhiaViagem(db, Companhia_Viagem("TAP",0, 0))
 
         db.close()
     }
@@ -67,7 +67,7 @@ class BDTeste {
     fun consegueInserirListaViagem(){
         val db = getWritableDataBase()
 
-        inserirListaViagem(db, Lista_Viagem(0,"Portugal", "S", "S", "S", "S", "S", 0, 0))
+        inserirListaViagem(db, Lista_Viagem("Portugal","calças", "colar", "computador", "pensos", "Sapatilhas", 0, 0))
 
         db.close()
 
@@ -80,24 +80,26 @@ class BDTeste {
     @Test
     fun consegueInserirInfoViagemBilhete(){
         val db = getWritableDataBase()
-        inserirInfoViagem(db, InfoViagemBilhete(0, "Ana", 24, 4, "Portugal", "Barcelona", "de mão","1 class" ))
+        inserirInfoViagem(db, InfoViagemBilhete("Ana", "24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1 class" ))
         db.close()
     }
 
     private fun inserirInfoViagem(db : SQLiteDatabase, infoViagemBilhete: InfoViagemBilhete){
         Tabela_Info_Viagem_Bilhete(db).insert(infoViagemBilhete.toContentValues())
+        assertNotEquals(-1, infoViagemBilhete.id)
     }
 
 
     @Test
     fun consegueInserirLocal(){
         val db = getWritableDataBase()
-        inserirLocal(db, Local(0, "Lisboa", "Madeira"))
+        inserirLocal(db, Local("Madeira", "Lisboa",0))
         db.close()
     }
 
     private fun inserirLocal(db : SQLiteDatabase, local: Local){
         TabelaLocal(db).insert(local.toContentValues())
+        assertNotEquals(-1, local.id)
     }
 
 
@@ -105,7 +107,7 @@ class BDTeste {
     fun consegueAlterarCompanhiaViagem(){
         val db = getWritableDataBase()
 
-        val companhiaviagem = Companhia_Viagem(0,"RAYNER", 0)
+        val companhiaviagem = Companhia_Viagem("RAYNER",0, 0)
         inserirCompanhiaViagem(db, companhiaviagem)
 
         companhiaviagem.nome = "Ana Raquel"
@@ -115,7 +117,7 @@ class BDTeste {
             "${Tabela_Companhia_Viagem.ID_COMPANHIA} =?",
             arrayOf("${companhiaviagem.id}")
         )
-
+        assertEquals(1, registosAlterados)
 
         db.close()
     }
@@ -124,7 +126,7 @@ class BDTeste {
     fun consegueAlterarPassageiro(){
         val db = getWritableDataBase()
 
-        val companhiaviagem = Companhia_Viagem(0,"Ana", 0)
+        val companhiaviagem = Companhia_Viagem("Ana",0, 0)
         inserirCompanhiaViagem(db, companhiaviagem)
 
         val passageiroRaquel = Passageiro("Ana", "Raquel", 22)
@@ -140,7 +142,7 @@ class BDTeste {
     fun consegueAlterarListaViagem(){
         val db = getWritableDataBase()
 
-        val listaViagem = Lista_Viagem(0, "viagem 1", "calças",
+        val listaViagem = Lista_Viagem("viagem 1","calças",
             "óculos", "pc",
             "pensos", "sapatilhas", 0, 0)
         inserirListaViagem(db, listaViagem)
@@ -152,8 +154,6 @@ class BDTeste {
             "${TabelaListaViagem.ID_LISTA} =?",
             arrayOf("${listaViagem.id}")
         )
-
         db.close()
     }
-
 }

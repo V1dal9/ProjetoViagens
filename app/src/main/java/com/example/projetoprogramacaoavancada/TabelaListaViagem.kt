@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteQueryBuilder
 class TabelaListaViagem (db:SQLiteDatabase):TabelaBD(db, NOME) {
     override fun cria() {
         db.execSQL("CREATE TABLE $nome(${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "$ID_LISTA LONG, " +
                 "$CAMPO_NOME TEXT, " +
                 "$ROUPA TEXT, " +
                 "$CALCADO TEXT, " +
@@ -18,8 +17,10 @@ class TabelaListaViagem (db:SQLiteDatabase):TabelaBD(db, NOME) {
                 "$HIGIENE TEXT, " +
                 "$PASSAGEIRO_ID INTEGER, " +
                 "$INFOVIAGEM_ID INTEGER, " +
-                "FOREIGN KEY ($PASSAGEIRO_ID) REFERENCES ${Tabela_Passageiro.NOME}(${BaseColumns._ID})ON DELETE RESTRICT," +
-                "FOREIGN KEY ($INFOVIAGEM_ID) REFERENCES ${Tabela_Info_Viagem_Bilhete.NOME}(${BaseColumns._ID})ON DELETE RESTRICT)")
+                "FOREIGN KEY($PASSAGEIRO_ID) " +
+                "REFERENCES ${Tabela_Passageiro.CAMPO_NOME}(${BaseColumns._ID}) ON DELETE RESTRICT," +
+                "FOREIGN KEY($INFOVIAGEM_ID) " +
+                "REFERENCES ${Tabela_Info_Viagem_Bilhete.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
     }
 
     override fun query(
@@ -39,13 +40,13 @@ class TabelaListaViagem (db:SQLiteDatabase):TabelaBD(db, NOME) {
     companion object{
         const val NOME = "ListaViagem"
 
-        const val ID_LISTA = "id"
+        const val ID_LISTA = "$NOME.${BaseColumns._ID}"
         const val CAMPO_NOME = "nome"
         const val ROUPA = "roupas"
         const val CALCADO = "calçados"
         const val ACESSORIO = "accessories"
-        const val ELETRONICO = "utensils informatics"
-        const val HIGIENE = "products hygienics"
+        const val ELETRONICO = "acessoriosInformaticos"
+        const val HIGIENE = "produtosHigienicos"
         const val PASSAGEIRO_ID  = "passageiroID"
         const val INFOVIAGEM_ID = "infoviagemID"
 

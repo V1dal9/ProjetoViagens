@@ -5,9 +5,9 @@ import android.database.Cursor
 import android.provider.BaseColumns
 
 class Companhia_Viagem(
-    var id : Long = -1,
     var nome : String,
-    var idPassageiro : Long
+    var idPassageiro : Long,
+    var id : Long = -1
 ) {
     fun toContenteValues() : ContentValues{
         val valores = ContentValues()
@@ -28,7 +28,7 @@ class Companhia_Viagem(
             val nome = cursor.getString(posNome)
             val idPassageiro = cursor.getLong(posIdPassageiro)
 
-            return Companhia_Viagem(id, nome, idPassageiro)
+            return Companhia_Viagem(nome, idPassageiro, id)
         }
     }
 

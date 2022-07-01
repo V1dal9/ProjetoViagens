@@ -2,6 +2,10 @@ package com.example.projetoprogramacaoavancada
 
 import android.database.Cursor
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.SimpleAdapter
 import android.widget.SimpleCursorAdapter
 import androidx.fragment.app.Fragment
@@ -15,10 +19,39 @@ class InserirInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Curso
 
     private var _binding: FragmentInseirViagemBinding? = null
 
+    // This property is only valid between onCreateView and
+    // onDestroyView
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentInseirViagemBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        LoaderManager.getInstance(this).initLoader(ID_LOADER_LISTA_VIAGEM, null, this)
+        val activity = activity as MainActivity
+        activity.fragment = this
+        activity.idMenuAtual = R.menu.menu_edita_lista
+    }
+
+    companion object{
+        const val ID_LOADER_LISTA_VIAGEM = 0
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> =
@@ -46,7 +79,16 @@ class InserirInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Curso
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
-        TODO("Not yet implemented")
+        binding.spinnerGenero.adapter = null
+    }
+
+    /*fun processaOpçãoMenu(item: MenuItem) : Boolean =
+       when(item.itemId){
+           R.id.ac
+       } */
+
+    private fun voltarListaViagem(){
+        //
     }
 
 

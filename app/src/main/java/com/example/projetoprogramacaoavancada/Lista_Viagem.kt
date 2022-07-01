@@ -6,7 +6,6 @@ import android.provider.BaseColumns
 import androidx.core.content.contentValuesOf
 
 class Lista_Viagem(
-    var id : Long = -1,
     var nome_lista : String,
     var roupa : String,
     var acessorios : String,
@@ -14,7 +13,8 @@ class Lista_Viagem(
     var higiene : String,
     var calcado : String,
     var idPassageiro : Long,
-    var idInfoViagem : Long
+    var idInfoViagem : Long,
+    var id : Long = -1
 ) {
     fun toContentValues() : ContentValues{
         val valoresLista = ContentValues()
@@ -53,7 +53,7 @@ class Lista_Viagem(
             val idPassageiro = cursor.getLong(posIdPassageiro)
             val idInfoViagem = cursor.getLong(posIdInfoViagem)
 
-            return Lista_Viagem(id, nome, acessorio, calcado, eletronico, higiene, roupa, idPassageiro, idInfoViagem)
+            return Lista_Viagem(nome, acessorio, calcado, eletronico, higiene, roupa, idPassageiro, idInfoViagem, id)
         }
     }
 }
