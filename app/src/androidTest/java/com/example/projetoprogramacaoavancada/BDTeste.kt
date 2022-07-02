@@ -41,12 +41,10 @@ class BDTeste {
 
     private fun inserirPassageiro(db : SQLiteDatabase, passageiro: Passageiro){
         passageiro.id = Tabela_Passageiro(db).insert(passageiro.toContentValues())
-        assertNotEquals(-1, passageiro.id)
     }
 
     private fun inserirCompanhiaViagem(db : SQLiteDatabase, companhiaviagem: Companhia_Viagem ){
         companhiaviagem.id = Tabela_Companhia_Viagem(db).insert(companhiaviagem.toContenteValues())
-        assertNotEquals(-1, companhiaviagem.id)
     }
 
     private fun getWritableDataBase(): SQLiteDatabase {
@@ -58,7 +56,7 @@ class BDTeste {
     fun consegueInserirCompanhiaViagem(){
         val db = getWritableDataBase()
 
-        inserirCompanhiaViagem(db, Companhia_Viagem("TAP",0, 0))
+        inserirCompanhiaViagem(db, Companhia_Viagem("TAP",0))
 
         db.close()
     }
@@ -86,20 +84,19 @@ class BDTeste {
 
     private fun inserirInfoViagem(db : SQLiteDatabase, infoViagemBilhete: InfoViagemBilhete){
         Tabela_Info_Viagem_Bilhete(db).insert(infoViagemBilhete.toContentValues())
-        assertNotEquals(-1, infoViagemBilhete.id)
     }
 
 
     @Test
     fun consegueInserirLocal(){
         val db = getWritableDataBase()
-        inserirLocal(db, Local("Madeira", "Lisboa",0))
+        inserirLocal(db, Local("Madeira", "Lisboa"))
         db.close()
     }
 
     private fun inserirLocal(db : SQLiteDatabase, local: Local){
         TabelaLocal(db).insert(local.toContentValues())
-        assertNotEquals(-1, local.id)
+
     }
 
 
@@ -107,7 +104,7 @@ class BDTeste {
     fun consegueAlterarCompanhiaViagem(){
         val db = getWritableDataBase()
 
-        val companhiaviagem = Companhia_Viagem("RAYNER",0, 0)
+        val companhiaviagem = Companhia_Viagem("RAYNER",0)
         inserirCompanhiaViagem(db, companhiaviagem)
 
         companhiaviagem.nome = "Ana Raquel"
@@ -126,7 +123,7 @@ class BDTeste {
     fun consegueAlterarPassageiro(){
         val db = getWritableDataBase()
 
-        val companhiaviagem = Companhia_Viagem("Ana",0, 0)
+        val companhiaviagem = Companhia_Viagem("Ana",0)
         inserirCompanhiaViagem(db, companhiaviagem)
 
         val passageiroRaquel = Passageiro("Ana", "Raquel", 22)
@@ -154,6 +151,7 @@ class BDTeste {
             "${TabelaListaViagem.ID_LISTA} =?",
             arrayOf("${listaViagem.id}")
         )
+        assertEquals(1, registosAlterados)
         db.close()
     }
 }
