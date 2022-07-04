@@ -55,20 +55,24 @@ class BDTeste {
     @Test
     fun consegueInserirCompanhiaViagem(){
         val db = getWritableDataBase()
-
-        inserirCompanhiaViagem(db, Companhia_Viagem("TAP",0))
-
+        val passageiro = Passageiro("Rita", "Feminino", 19)
+        inserirPassageiro(db, passageiro)
+        val companhiaviagem = Companhia_Viagem("TAP", passageiro.id)
+        inserirCompanhiaViagem(db, companhiaviagem)
         db.close()
     }
 
     @Test
     fun consegueInserirListaViagem(){
         val db = getWritableDataBase()
-
-        inserirListaViagem(db, Lista_Viagem("Portugal","calças", "colar", "computador", "pensos", "Sapatilhas", 0, 0))
+        val passageiro = Passageiro("Luís", "Masculino", 49)
+        inserirPassageiro(db, passageiro)
+        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiro.id)
+        inserirInfoViagem(db, infoviagemBilhete)
+        val listaViagem = Lista_Viagem("Portugal","calças", "colar", "computador", "pensos", "Sapatilhas", 0, 0)
+        inserirListaViagem(db, listaViagem)
 
         db.close()
-
     }
 
     private fun inserirListaViagem(db : SQLiteDatabase, listaViagem: Lista_Viagem){
@@ -78,8 +82,53 @@ class BDTeste {
     @Test
     fun consegueInserirInfoViagemBilhete(){
         val db = getWritableDataBase()
-        inserirInfoViagem(db, InfoViagemBilhete("Ana", "24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1 class" ))
+        val passageiro = Passageiro("Luís", "Masculino", 49)
+        inserirPassageiro(db, passageiro)
+        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiro.id)
+        inserirInfoViagem(db, infoviagemBilhete)
         db.close()
+    }
+
+    @Test
+    fun consegueAlterarInfoViagemBilhete(){
+        val db = getWritableDataBase()
+        val passageiroLuis = Passageiro("Luís", "Masculino", 49)
+        inserirPassageiro(db, passageiroLuis)
+
+        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiroLuis.id)
+        inserirInfoViagem(db, infoviagemBilhete)
+
+        infoviagemBilhete.dataInicio = "20/07/2024"
+        infoviagemBilhete.dataFim = "30/07/2024"
+        infoviagemBilhete.localOrigem = "Barcelona"
+        infoviagemBilhete.localDestino = "Madeira"
+        infoviagemBilhete.tipoMala = "porão"
+        infoviagemBilhete.classViagem = "2ª Class"
+        infoviagemBilhete.idPassageiro = passageiroLuis.id
+
+        val registosAlterados = Tabela_Info_Viagem_Bilhete(db).update(
+            infoviagemBilhete.toContentValues(),
+            "${Tabela_Info_Viagem_Bilhete.CAMPO_ID}=?",
+            arrayOf("${infoviagemBilhete.id}")
+        )
+
+
+        db.close()
+    }
+    @Test
+    fun consegueEliminarInfoViagemBilhete(){
+        val db = getWritableDataBase()
+        val passageiroLuis = Passageiro("Luís", "Masculino", 49)
+        inserirPassageiro(db, passageiroLuis)
+        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiroLuis.id)
+        inserirInfoViagem(db, infoviagemBilhete)
+
+        val registosEliminados = Tabela_Info_Viagem_Bilhete(db).delete(
+            "${Tabela_Info_Viagem_Bilhete.CAMPO_ID}=?",
+            arrayOf("${infoviagemBilhete.id}")
+        )
+        db.close()
+
     }
 
     private fun inserirInfoViagem(db : SQLiteDatabase, infoViagemBilhete: InfoViagemBilhete){
@@ -90,6 +139,7 @@ class BDTeste {
     @Test
     fun consegueInserirLocal(){
         val db = getWritableDataBase()
+
         inserirLocal(db, Local("Madeira", "Lisboa"))
         db.close()
     }
@@ -104,10 +154,13 @@ class BDTeste {
     fun consegueAlterarCompanhiaViagem(){
         val db = getWritableDataBase()
 
-        val companhiaviagem = Companhia_Viagem("RAYNER",0)
+        val passageiroAna = Passageiro("Ana", "Feminino", 19)
+        inserirPassageiro(db, passageiroAna)
+        val companhiaviagem = Companhia_Viagem("RAYNER", passageiroAna.id)
         inserirCompanhiaViagem(db, companhiaviagem)
 
         companhiaviagem.nome = "Ana Raquel"
+        companhiaviagem.idPassageiro = passageiroAna.id //associar o id
 
         val registosAlterados = Tabela_Companhia_Viagem(db).update(
             companhiaviagem.toContenteValues(),
@@ -116,6 +169,21 @@ class BDTeste {
         )
         assertEquals(1, registosAlterados)
 
+        db.close()
+    }
+
+    @Test
+    fun consegueEliminarCompanhiaViagem(){
+        val db = getWritableDataBase()
+        val passageiro = Passageiro("João", "Masculino", 30)
+        inserirPassageiro(db, passageiro)
+        val companhiaviagem = Companhia_Viagem("TAP", passageiro.id)
+        inserirCompanhiaViagem(db, companhiaviagem)
+        val registosEliminados = Tabela_Companhia_Viagem(db).delete(
+            "${Tabela_Companhia_Viagem.ID_COMPANHIA}=?",
+            arrayOf("${companhiaviagem.id}")
+        )
+        assertEquals(1, registosEliminados)
         db.close()
     }
 
@@ -147,18 +215,30 @@ class BDTeste {
             "${Tabela_Passageiro.ID_PASSAGEIRO}=?",
             arrayOf("${passageiro.id}")
         )
+        assertEquals(1, registosEliminados)
+        db.close()
     }
 
     @Test
     fun consegueAlterarListaViagem(){
         val db = getWritableDataBase()
-
+        val passageiro = Passageiro("Luís", "Masculino", 49)
+        inserirPassageiro(db, passageiro)
+        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiro.id)
+        inserirInfoViagem(db, infoviagemBilhete)
         val listaViagem = Lista_Viagem("viagem 1","calças",
             "óculos", "pc",
             "pensos", "sapatilhas", 0, 0)
         inserirListaViagem(db, listaViagem)
 
         listaViagem.nome_lista = "Madeira"
+        listaViagem.acessorios = "colar"
+        listaViagem.calcado = "salto alto"
+        listaViagem.eletronico = "computador"
+        listaViagem.higiene = "pasta de dentes"
+        listaViagem.higiene = "calisola\n calções\n cuecas"
+        listaViagem.idPassageiro = passageiro.id
+        listaViagem.idInfoViagem = infoviagemBilhete.id
 
         val registosAlterados = TabelaListaViagem(db).update(
             listaViagem.toContentValues(),
@@ -166,6 +246,25 @@ class BDTeste {
             arrayOf("${listaViagem.id}")
         )
         assertEquals(1, registosAlterados)
+        db.close()
+    }
+
+    @Test
+    fun consegueEliminarListaViagem(){
+        val db = getWritableDataBase()
+        val passageiro = Passageiro("Luís", "Masculino", 49)
+        inserirPassageiro(db, passageiro)
+        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiro.id)
+        inserirInfoViagem(db, infoviagemBilhete)
+        val listaViagem = Lista_Viagem("viagem 1","calças",
+            "óculos", "pc",
+            "pensos", "sapatilhas", 0, 0)
+        inserirListaViagem(db, listaViagem)
+
+        val registoEliminado = TabelaListaViagem(db).delete(
+            "${TabelaListaViagem.ID_LISTA}=?",
+            arrayOf("${listaViagem.id}")
+        )
         db.close()
     }
 }
