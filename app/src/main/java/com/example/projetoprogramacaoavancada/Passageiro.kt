@@ -13,7 +13,7 @@ data class Passageiro(
 ) {
     fun toContentValues() : ContentValues{
         val valores = ContentValues()
-        valores.put(Tabela_Passageiro.NOME, nome)
+        valores.put(Tabela_Passageiro.CAMPO_NOME, nome)
         valores.put(Tabela_Passageiro.GENERO, genero)
         valores.put(Tabela_Passageiro.IDADE, idade)
 

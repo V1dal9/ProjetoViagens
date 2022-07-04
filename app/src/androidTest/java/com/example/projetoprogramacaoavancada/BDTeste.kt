@@ -123,16 +123,30 @@ class BDTeste {
     fun consegueAlterarPassageiro(){
         val db = getWritableDataBase()
 
-        val companhiaviagem = Companhia_Viagem("Ana",0)
-        inserirCompanhiaViagem(db, companhiaviagem)
+        val passageiro = Passageiro("Ana", "Raquel", 22)
+        inserirPassageiro(db, passageiro)
 
-        val passageiroRaquel = Passageiro("Ana", "Raquel", 22)
-        inserirPassageiro(db, passageiroRaquel)
+        passageiro.nome = "Ana Raquel"
 
-        val passageiroAna = Passageiro("Ana", "F", 20)
-        inserirPassageiro(db, passageiroAna)
-
+        val registosAlterar = Tabela_Passageiro(db).update(
+            passageiro.toContentValues(),
+            "${Tabela_Passageiro.CAMPO_NOME}=?",
+            arrayOf("${passageiro.id}")
+        )
         db.close()
+    }
+
+    @Test
+    fun consegueEliminarPassageiro(){
+        val db = getWritableDataBase()
+
+        val passageiro = Passageiro("Ana Raquel", "Feminino", 23)
+        inserirPassageiro(db, passageiro)
+
+        val registosEliminados = Tabela_Passageiro(db).delete(
+            "${Tabela_Passageiro.ID_PASSAGEIRO}=?",
+            arrayOf("${passageiro.id}")
+        )
     }
 
     @Test
