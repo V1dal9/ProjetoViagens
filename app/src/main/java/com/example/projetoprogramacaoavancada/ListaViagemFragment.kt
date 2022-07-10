@@ -2,11 +2,11 @@ package com.example.projetoprogramacaoavancada
 
 import android.database.Cursor
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
@@ -18,12 +18,18 @@ import com.example.projetoprogramacaoavancada.databinding.FragmentListaViagemBin
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
+    var viagemSelecionada : Lista_Viagem? = null
+    get() = field
+    set(value){
+        field = value
+        (requireActivity() as MainActivity).mostraOpçãoAlterarEliminar(field != null)
+    }
 
     private var _binding: FragmentListaViagemBinding? = null
     private var adapterViagem : AdapterViagem? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +52,7 @@ class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
         val activity = activity as MainActivity
         activity.fragment = this
-        activity.idMenuAtual = R.menu.menu_main
+        activity.idMenuAtual = R.menu.menu_lista
     }
 
     override fun onDestroyView() {
@@ -55,8 +61,8 @@ class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
 
-    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-        return CursorLoader(
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> =
+        CursorLoader(
             requireContext(),
             ContentProviderViagem.ENDERECO_LISTA,
             Tabela_Passageiro.TODAS_COLUNAS,
@@ -64,13 +70,14 @@ class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
             null,
             "${TabelaListaViagem.CAMPO_NOME}"
         )
-    }
+
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
         adapterViagem!!.cursor = data
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
+        if (_binding == null) return
         adapterViagem!!.cursor = null
     }
 
@@ -80,7 +87,10 @@ class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
                 findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
                 true
             }
-            R.id.action_settings -> true
+            R.id.action_edit -> {
+
+                true
+            }
             R.id.action_edit -> true
             else -> false
 

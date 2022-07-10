@@ -16,7 +16,11 @@ class AdapterViagem(val fragment: ListaViagemFragment) : RecyclerView.Adapter<Ad
         }
     }
 
-    class ViewHolderViagem(itemViagem : View) : RecyclerView.ViewHolder(itemViagem){
+    var viewHolderSelecionado : ViewHolderViagem? = null
+
+    inner class ViewHolderViagem(itemViagem : View) : RecyclerView.ViewHolder(itemViagem){
+
+
         val textViewNomeViagem = itemViagem.findViewById<TextView>(R.id.textViewNomeViagem)
         val textViewPassageiros = itemViagem.findViewById<TextView>(R.id.textViewPassageiros)
         val textViewOrigem = itemViagem.findViewById<TextView>(R.id.textViewOrigem)
@@ -55,7 +59,24 @@ class AdapterViagem(val fragment: ListaViagemFragment) : RecyclerView.Adapter<Ad
                 textViewPassageiros.text = passageiro?.nome ?: ""
             }
 
+        override fun onClick(v : View?){
+            viewHolderSelecionado?.desseleciona()
+            seleciona()
+        }
+
+        private fun seleciona(){
+            itemView.setBackgroundResource(android.R.color.holo_orange_light)
+            viewHolderSelecionado = this
+            fragment.viagemSelecionada = listaviagem
+        }
+
+        private fun desseleciona(){
+            itemView.setBackgroundResource(android.R.color.white)
+        }
+
     }
+
+
 
     override fun onBindViewHolder(holder: ViewHolderViagem, position: Int) {
         cursor!!.moveToPosition(position)
