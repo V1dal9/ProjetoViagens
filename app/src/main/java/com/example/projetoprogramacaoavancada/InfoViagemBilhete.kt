@@ -11,7 +11,7 @@ class InfoViagemBilhete(
     var localDestino: String,
     var tipoMala: String,
     var classViagem: String,
-    var idPassageiro: Long,
+    var Passageiro: Passageiro,
     var id: Long = -1
 ) {
     fun toContentValues(): ContentValues {
@@ -22,7 +22,7 @@ class InfoViagemBilhete(
         valores.put(Tabela_Info_Viagem_Bilhete.DATA_INICIO, dataInicio)
         valores.put(Tabela_Info_Viagem_Bilhete.TIPO_MALA , tipoMala)
         valores.put(Tabela_Info_Viagem_Bilhete.CLASS_VIAGEM , classViagem)
-        valores.put(Tabela_Info_Viagem_Bilhete.PASSAGEIRO_ID, idPassageiro)
+        valores.put(Tabela_Info_Viagem_Bilhete.PASSAGEIRO_ID, Passageiro.id)
         return valores
     }
     companion object{
@@ -35,6 +35,9 @@ class InfoViagemBilhete(
             val posTipoMala = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.TIPO_MALA)
             val posClassViagem = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.CLASS_VIAGEM)
             val posIdPassageiro = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.PASSAGEIRO_ID)
+            val posNomePassageiro = cursor.getColumnIndex(Tabela_Passageiro.CAMPO_NOME)
+            val posGenero = cursor.getColumnIndex(Tabela_Passageiro.GENERO)
+            val posIdade = cursor.getColumnIndex(Tabela_Passageiro.IDADE)
 
             val id = cursor.getLong(posId)
             val origem = cursor.getString(posOrigem)
@@ -43,10 +46,15 @@ class InfoViagemBilhete(
             val dataInicio = cursor.getString(posDataInicio)
             val tipoMala = cursor.getString(posTipoMala)
             val classViagem = cursor.getString(posClassViagem)
+
             val idPassageiro = cursor.getLong(posIdPassageiro)
+            val nomePassageiro = cursor.getString(posNomePassageiro)
+            val generoPassageiro = cursor.getString(posGenero)
+            val idadePassageiro = cursor.getLong(posIdade)
+            val Passageiro = Passageiro(nomePassageiro, generoPassageiro, idadePassageiro, idPassageiro)
 
 
-            return InfoViagemBilhete(dataInicio, dataFim, origem , destino, tipoMala, classViagem, idPassageiro, id)
+            return InfoViagemBilhete(dataInicio, dataFim, origem , destino, tipoMala, classViagem, Passageiro, id)
 
         }
     }
