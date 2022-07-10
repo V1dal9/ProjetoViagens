@@ -18,46 +18,49 @@ class AdapterViagem(val fragment: ListaViagemFragment) : RecyclerView.Adapter<Ad
 
     var viewHolderSelecionado : ViewHolderViagem? = null
 
-    inner class ViewHolderViagem(itemViagem : View) : RecyclerView.ViewHolder(itemViagem){
+    inner class ViewHolderViagem(itemViagem : View) : RecyclerView.ViewHolder(itemViagem),
+        View.OnClickListener {
 
 
         val textViewNomeViagem = itemViagem.findViewById<TextView>(R.id.textViewNomeViagem)
         val textViewPassageiros = itemViagem.findViewById<TextView>(R.id.textViewPassageiros)
-        val textViewOrigem = itemViagem.findViewById<TextView>(R.id.textViewOrigem)
+        /*val textViewOrigem = itemViagem.findViewById<TextView>(R.id.textViewOrigem)
         val textViewDestino = itemViagem.findViewById<TextView>(R.id.textViewDestino)
         val textViewDataInicio = itemViagem.findViewById<TextView>(R.id.textViewData_inicio)
-        val textViewDataFim = itemViagem.findViewById<TextView>(R.id.textViewData_fim)
-        val textViewListaLevar = itemViagem.findViewById<TextView>(R.id.textViewListalevar)
+        val textViewDataFim = itemViagem.findViewById<TextView>(R.id.textViewData_fim)*/
+        val textViewListaAcessórios = itemViagem.findViewById<TextView>(R.id.textViewListalevar)
+        val textViewListacalcado = itemViagem.findViewById<TextView>(R.id.textViewListalevar2)
+        val textViewListaeletronico = itemViagem.findViewById<TextView>(R.id.textViewListalevar3)
+        val textViewListahigiene = itemViagem.findViewById<TextView>(R.id.textViewListalevar4)
+        val textViewListaroupa = itemViagem.findViewById<TextView>(R.id.textViewListalevar5)
         val textViewBilheteInfoClass = itemViagem.findViewById<TextView>(R.id.textViewBilhete_info_class)
+
+        init {
+            itemViagem.setOnClickListener(this)
+        }
 
         var listaviagem : Lista_Viagem? = null
             get() = field
             set(value: Lista_Viagem?){
                 field = value
 
-                textViewListaLevar.text = listaviagem?.acessorios ?: ""
-                textViewListaLevar.text = listaviagem?.calcado ?: ""
-                textViewListaLevar.text = listaviagem?.eletronico ?: ""
-                textViewListaLevar.text = listaviagem?.higiene ?: ""
-                textViewListaLevar.text = listaviagem?.roupa ?: ""
+                textViewListaAcessórios.text = listaviagem?.acessorios ?: ""
+                textViewListacalcado.text = listaviagem?.calcado ?: ""
+                textViewListaeletronico.text = listaviagem?.eletronico ?: ""
+                textViewListahigiene.text = listaviagem?.higiene ?: ""
+                textViewListaroupa.text = listaviagem?.roupa ?: ""
                 textViewNomeViagem.text = listaviagem?.nome_lista ?: ""
+                textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.classViagem ?: ""
+                textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.localDestino ?: ""
+                textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.localOrigem ?: ""
+                textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.dataFim ?: ""
+                textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.dataInicio ?: ""
+                textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.tipoMala ?: ""
+                textViewPassageiros.text = listaviagem?.Passageiro?.nome ?: ""
+                textViewPassageiros.text = listaviagem?.Passageiro?.genero ?: ""
+                textViewPassageiros.text = listaviagem?.Passageiro?.idade.toString() ?: ""
             }
-        var bilheteInfo : InfoViagemBilhete? = null
-            get() = field
-            set(value: InfoViagemBilhete?){
-                field = value
 
-                textViewBilheteInfoClass.text = bilheteInfo?.classViagem ?: ""
-                textViewDataInicio.text = bilheteInfo?.dataInicio.toString() //passar para texto a data
-                textViewDataFim.text = bilheteInfo?.dataFim.toString()
-                textViewOrigem.text = bilheteInfo?.localOrigem ?: ""
-                textViewDestino.text = bilheteInfo?.localDestino ?: ""
-            }
-        var passageiro : Passageiro? = null
-            get() = field
-            set(value: Passageiro?){
-                textViewPassageiros.text = passageiro?.nome ?: ""
-            }
 
         override fun onClick(v : View?){
             viewHolderSelecionado?.desseleciona()
