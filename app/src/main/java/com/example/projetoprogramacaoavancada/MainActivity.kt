@@ -1,14 +1,14 @@
 package com.example.projetoprogramacaoavancada
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
-import androidx.fragment.app.Fragment
 import com.example.projetoprogramacaoavancada.databinding.ActivityMainBinding
 
 
@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    var menu: Menu? = null
     var fragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,5 +76,12 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+    fun mostraOpçãoAlterarEliminar(mostra: Boolean){
+        menu!!.findItem(R.id.action_edit).setVisible(mostra)
+        menu!!.findItem(R.id.action_eliminar).setVisible(mostra)
+    }
+    fun atualizaTitulo(id_string_titulo: Int){
+        binding.toolbar.setTitle(id_string_titulo)
     }
 }
