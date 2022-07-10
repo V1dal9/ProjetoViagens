@@ -58,11 +58,11 @@ class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
         return CursorLoader(
             requireContext(),
-            ContentProviderViagem.ENDERECO_PASSAGEIRO,
+            ContentProviderViagem.ENDERECO_LISTA,
             Tabela_Passageiro.TODAS_COLUNAS,
             null,
             null,
-            "${Tabela_Passageiro.CAMPO_NOME}"
+            "${TabelaListaViagem.CAMPO_NOME}"
         )
     }
 

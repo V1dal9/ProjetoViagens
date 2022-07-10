@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/MenuInicial">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/MenuInicial"
         android:name="com.example.projetoprogramacaoavancada.MenuInicialFragment"
-        android:label="@string/first_fragment_label"
+        android:label="Menu Inicial"
         tools:layout="@layout/fragment_menu_inicial">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/ListaViagem" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/ListaViagem"
         android:name="com.example.projetoprogramacaoavancada.ListaViagemFragment"
-        android:label="@string/second_fragment_label"
+        android:label="Lista de Viagens"
         tools:layout="@layout/fragment_lista_viagem">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/MenuInicial" />
     </fragment>
 </navigation>

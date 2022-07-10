@@ -5,7 +5,7 @@ import android.database.Cursor
 import android.provider.BaseColumns
 import androidx.core.content.contentValuesOf
 
-class Lista_Viagem(
+data class Lista_Viagem(
     var nome_lista : String,
     var roupa : String,
     var acessorios : String,
