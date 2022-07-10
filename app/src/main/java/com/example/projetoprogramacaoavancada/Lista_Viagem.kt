@@ -3,7 +3,6 @@ package com.example.projetoprogramacaoavancada
 import android.content.ContentValues
 import android.database.Cursor
 import android.provider.BaseColumns
-import androidx.core.content.contentValuesOf
 
 data class Lista_Viagem(
     var nome_lista : String,
@@ -13,7 +12,7 @@ data class Lista_Viagem(
     var higiene : String,
     var calcado : String,
     var idPassageiro : Long,
-    var idInfoViagem : Long,
+    var InfoViagem : InfoViagemBilhete,
     var id : Long = -1
 ) {
     fun toContentValues() : ContentValues{
@@ -25,7 +24,7 @@ data class Lista_Viagem(
         valoresLista.put(TabelaListaViagem.HIGIENE, higiene)
         valoresLista.put(TabelaListaViagem.ROUPA, roupa)
         valoresLista.put(TabelaListaViagem.PASSAGEIRO_ID, idPassageiro)
-        valoresLista.put(TabelaListaViagem.INFOVIAGEM_ID, idInfoViagem)
+        valoresLista.put(TabelaListaViagem.INFOVIAGEM_ID, InfoViagem.id)
 
         return valoresLista
 
@@ -42,6 +41,12 @@ data class Lista_Viagem(
             val posRoupa = cursor.getColumnIndex(TabelaListaViagem.ROUPA)
             val posIdPassageiro = cursor.getColumnIndex(TabelaListaViagem.PASSAGEIRO_ID)
             val posIdInfoViagem = cursor.getColumnIndex(TabelaListaViagem.INFOVIAGEM_ID)
+            val posLocalDestino = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.LOCAL_DESTINO)
+            val posLocalOrigem = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.LOCAL_ORIGEM)
+            val posDataInicio = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.DATA_INICIO)
+            val posDataFim = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.DATA_FIM)
+            val posTipoMala = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.TIPO_MALA)
+            val posClass = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.CLASS_VIAGEM)
 
             val id = cursor.getLong(posId)
             val nome = cursor.getString(posNome)
@@ -51,9 +56,17 @@ data class Lista_Viagem(
             val higiene = cursor.getString(posHigiene)
             val roupa = cursor.getString(posRoupa)
             val idPassageiro = cursor.getLong(posIdPassageiro)
-            val idInfoViagem = cursor.getLong(posIdInfoViagem)
 
-            return Lista_Viagem(nome, acessorio, calcado, eletronico, higiene, roupa, idPassageiro, idInfoViagem, id)
+            val idInfoBilhete = cursor.getLong(posIdInfoViagem)
+            val localDestino = cursor.getString(posLocalDestino)
+            val localOrigem = cursor.getString(posLocalOrigem)
+            val dataInicio = cursor.getString(posDataInicio)
+            val dataFim = cursor.getString(posDataFim)
+            val tipoMala = cursor.getString(posTipoMala)
+            val classViagem = cursor.getString(posClass)
+            val InfoViagem = InfoViagemBilhete(dataInicio, dataFim, localDestino, localOrigem, tipoMala, classViagem, idInfoBilhete)
+
+            return Lista_Viagem(nome, acessorio, calcado, eletronico, higiene, roupa, idPassageiro, InfoViagem, id)
         }
     }
 }
