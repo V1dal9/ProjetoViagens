@@ -24,10 +24,16 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/MenuInicial" />
+        <action
+            android:id="@+id/action_ListaViagem_to_EditarViagemFragment"
+            app:destination="@id/EditarViagemFragment" />
     </fragment>
     <fragment
         android:id="@+id/EditarViagemFragment"
         android:name="com.example.projetoprogramacaoavancada.EditarInfoViagemFragment"
         tools:layout="@layout/fragment_editar_viagem">
+        <action
+            android:id="@+id/action_EditarViagemFragment_to_ListaViagem"
+            app:destination="@id/ListaViagem" />
     </fragment>
 </navigation>
