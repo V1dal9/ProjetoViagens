@@ -35,5 +35,10 @@
         <action
             android:id="@+id/action_EditarViagemFragment_to_ListaViagem"
             app:destination="@id/ListaViagem" />
+        <argument
+            android:name="Lista Viagem"
+            app:argType="com.example.projetoprogramacaoavancada.Lista_Viagem"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>
