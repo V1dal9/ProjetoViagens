@@ -25,4 +25,9 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/MenuInicial" />
     </fragment>
+    <fragment
+        android:id="@+id/EditarViagemFragment"
+        android:name="com.example.projetoprogramacaoavancada.EditarInfoViagemFragment"
+        tools:layout="@layout/fragment_editar_viagem">
+    </fragment>
 </navigation>
