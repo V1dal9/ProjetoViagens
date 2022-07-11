@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         menu!!.findItem(R.id.action_edit).setVisible(mostra)
         menu!!.findItem(R.id.action_eliminar).setVisible(mostra)
     }
-    fun atualizaNome(id_string_titulo: Int){
-        binding.toolbar.setTitle(id_string_titulo)
+    fun atualizaNome(id_string_nome: String){
+        binding.toolbar.setTitle(id_string_nome)
     }
 }
