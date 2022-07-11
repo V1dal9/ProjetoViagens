@@ -17,4 +17,11 @@
     <string name="inserir">Inserir</string>
     <string name="edit">Edit</string>
     <string name="eliminar">eliminar</string>
+    <string name="eletr_nicos">Eletrónicos</string>
+    <string name="higiene">Higiene</string>
+    <string name="acess_rios">Acessórios</string>
+    <string name="roupas">Roupas</string>
+    <string name="cal_ado">Calçado</string>
+    <string name="lista_de_viagem">Lista de Viagem</string>
+    <string name="name">Name</string>
 </resources>
