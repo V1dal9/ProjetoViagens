@@ -1,9 +1,9 @@
 package com.example.projetoprogramacaoavancada
 
 import android.database.Cursor
-import android.provider.BaseColumns
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteQueryBuilder
+import android.provider.BaseColumns
 
 
 class TabelaListaViagem (db:SQLiteDatabase):TabelaBD(db, NOME) {
@@ -15,10 +15,10 @@ class TabelaListaViagem (db:SQLiteDatabase):TabelaBD(db, NOME) {
                 "$ACESSORIO TEXT, " +
                 "$ELETRONICO TEXT, " +
                 "$HIGIENE TEXT, " +
-                "$PASSAGEIRO_ID INTEGER, " +
-                "$INFOVIAGEM_ID INTEGER, " +
+                "$PASSAGEIRO_ID INTEGER NOT NULL, " +
+                "$INFOVIAGEM_ID INTEGER NOT NULL, " +
                 "FOREIGN KEY($PASSAGEIRO_ID) " +
-                "REFERENCES ${Tabela_Passageiro.CAMPO_NOME}(${BaseColumns._ID}) ON DELETE RESTRICT," +
+                "REFERENCES ${Tabela_Passageiro.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT," +
                 "FOREIGN KEY($INFOVIAGEM_ID) " +
                 "REFERENCES ${Tabela_Info_Viagem_Bilhete.NOME}(${BaseColumns._ID}) ON DELETE RESTRICT)")
     }
@@ -31,10 +31,14 @@ class TabelaListaViagem (db:SQLiteDatabase):TabelaBD(db, NOME) {
         having: String?,
         orderBy: String?
     ): Cursor {
-        val queryBuilder = SQLiteQueryBuilder()
-        queryBuilder.tables = "$NOME INNER JOIN ${Tabela_Passageiro.NOME} ON ${Tabela_Passageiro.ID_PASSAGEIRO} = $PASSAGEIRO_ID"
-        queryBuilder.tables = "$NOME INNER JOIN ${Tabela_Info_Viagem_Bilhete.NOME} ON ${Tabela_Info_Viagem_Bilhete.CAMPO_ID} = $INFOVIAGEM_ID"
-        return queryBuilder.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
+        val queryBuilderPassageiros = SQLiteQueryBuilder()
+        queryBuilderPassageiros.tables = "$NOME INNER JOIN ${Tabela_Passageiro.NOME} ON ${Tabela_Passageiro.NOME}.${BaseColumns._ID} = $PASSAGEIRO_ID"
+
+
+        val queryBuilderViagemBilhete = SQLiteQueryBuilder()
+        queryBuilderViagemBilhete.tables = "$NOME INNER JOIN ${Tabela_Info_Viagem_Bilhete.NOME} ON ${Tabela_Info_Viagem_Bilhete.NOME}.${BaseColumns._ID} = $INFOVIAGEM_ID"
+        return queryBuilderPassageiros.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
+        return queryBuilderViagemBilhete.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
     }
 
     companion object{

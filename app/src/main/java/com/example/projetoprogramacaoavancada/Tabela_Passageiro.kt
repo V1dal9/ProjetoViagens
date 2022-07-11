@@ -16,9 +16,9 @@ class Tabela_Passageiro(db: SQLiteDatabase): TabelaBD(db, NOME) {
         const val CAMPO_NOME = "nome"
         const val GENERO = "genero"
         const val IDADE = "idade"
-        const val ID_PASSAGEIRO = "$NOME.${BaseColumns._ID}"
+        const val CAMPO_ID = "$NOME.${BaseColumns._ID}"
 
-        val TODAS_COLUNAS = arrayOf(ID_PASSAGEIRO, CAMPO_NOME)
+        val TODAS_COLUNAS = arrayOf(CAMPO_ID, CAMPO_NOME)
     }
 
 
