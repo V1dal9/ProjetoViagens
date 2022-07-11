@@ -15,7 +15,7 @@ import androidx.loader.content.Loader
 import com.example.projetoprogramacaoavancada.databinding.FragmentInseirViagemBinding
 
 
-class InserirInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
+class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
     private var _binding: FragmentInseirViagemBinding? = null
 
