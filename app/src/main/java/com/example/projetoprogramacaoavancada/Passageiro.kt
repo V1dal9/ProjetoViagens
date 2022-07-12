@@ -3,17 +3,16 @@ package com.example.projetoprogramacaoavancada
 import android.content.ContentValues
 import android.database.Cursor
 import android.provider.BaseColumns
-import java.net.PasswordAuthentication
 
 data class Passageiro(
-    var nome : String,
+    var namePassageiro : String,
     var genero : String,
     var idade : Long,
     var id : Long = -1
 ) {
     fun toContentValues() : ContentValues{
         val valores = ContentValues()
-        valores.put(Tabela_Passageiro.CAMPO_NOME, nome)
+        valores.put(Tabela_Passageiro.CAMPO_NOME_PASSAGEIRO, namePassageiro)
         valores.put(Tabela_Passageiro.GENERO, genero)
         valores.put(Tabela_Passageiro.IDADE, idade)
 
@@ -22,7 +21,7 @@ data class Passageiro(
     companion object{
         fun fromCursor(cursor: Cursor): Passageiro{
             val posId = cursor.getColumnIndex(BaseColumns._ID)
-            val posNome = cursor.getColumnIndex(Tabela_Passageiro.NOME)
+            val posNome = cursor.getColumnIndex(Tabela_Passageiro.CAMPO_NOME_PASSAGEIRO)
             val posGenero = cursor.getColumnIndex(Tabela_Passageiro.GENERO)
             val posIdade = cursor.getColumnIndex(Tabela_Passageiro.IDADE)
 
