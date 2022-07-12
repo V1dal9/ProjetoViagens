@@ -3,21 +3,19 @@ package com.example.projetoprogramacaoavancada
 import android.database.Cursor
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SimpleAdapter
 import android.widget.SimpleCursorAdapter
 import androidx.fragment.app.Fragment
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
-import com.example.projetoprogramacaoavancada.databinding.FragmentInseirViagemBinding
+import com.example.projetoprogramacaoavancada.databinding.FragmentEditarViagemBinding
 
 
 class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
-    private var _binding: FragmentInseirViagemBinding? = null
+    private var _binding: FragmentEditarViagemBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView
@@ -32,7 +30,7 @@ class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentInseirViagemBinding.inflate(inflater, container, false)
+        _binding = FragmentEditarViagemBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -61,7 +59,7 @@ class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor
             Tabela_Passageiro.TODAS_COLUNAS,
             null,
             null,
-            Tabela_Passageiro.CAMPO_NOME
+            Tabela_Passageiro.CAMPO_NOME_PASSAGEIRO
         )
 
 
