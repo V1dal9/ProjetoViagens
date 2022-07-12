@@ -11,7 +11,7 @@ data class Lista_Viagem(
     var eletronico : String,
     var higiene : String,
     var calcado : String,
-    var Passageiro : Passageiro,
+    var passageiro : Passageiro,
     var InfoViagem : InfoViagemBilhete,
     var id : Long = -1
 ) {
@@ -23,7 +23,7 @@ data class Lista_Viagem(
         valoresLista.put(TabelaListaViagem.ELETRONICO, eletronico)
         valoresLista.put(TabelaListaViagem.HIGIENE, higiene)
         valoresLista.put(TabelaListaViagem.ROUPA, roupa)
-        valoresLista.put(TabelaListaViagem.PASSAGEIRO_ID, Passageiro.id)
+        valoresLista.put(TabelaListaViagem.PASSAGEIRO_ID, passageiro.id)
         valoresLista.put(TabelaListaViagem.INFOVIAGEM_ID, InfoViagem.id)
 
         return valoresLista
@@ -59,11 +59,11 @@ data class Lista_Viagem(
             val higiene = cursor.getString(posHigiene)
             val roupa = cursor.getString(posRoupa)
 
-            val idPassageiro = cursor.getLong(posIdPassageiro)
+            val campoIdPassageiro = cursor.getLong(posIdPassageiro)
             val nomePassageiro = cursor.getString(posNomePassageiro)
             val generoPassageiro = cursor.getString(posGenero)
             val idadePassageiro = cursor.getLong(posIdade)
-            val Passageiro = Passageiro(nomePassageiro, generoPassageiro, idadePassageiro, idPassageiro)
+            val passageiro = Passageiro(nomePassageiro, generoPassageiro, idadePassageiro, campoIdPassageiro)
 
             val idInfoBilhete = cursor.getLong(posIdInfoViagem)
             val localDestino = cursor.getString(posLocalDestino)
@@ -72,9 +72,9 @@ data class Lista_Viagem(
             val dataFim = cursor.getString(posDataFim)
             val tipoMala = cursor.getString(posTipoMala)
             val classViagem = cursor.getString(posClass)
-            val InfoViagem = InfoViagemBilhete(dataInicio, dataFim, localDestino, localOrigem, tipoMala, classViagem, Passageiro, idInfoBilhete)
+            val InfoViagem = InfoViagemBilhete(dataInicio, dataFim, localDestino, localOrigem, tipoMala, classViagem, passageiro, idInfoBilhete)
 
-            return Lista_Viagem(nome, acessorio, calcado, eletronico, higiene, roupa, Passageiro, InfoViagem, id)
+            return Lista_Viagem(nome, acessorio, calcado, eletronico, higiene, roupa, passageiro, InfoViagem, id)
         }
     }
 }

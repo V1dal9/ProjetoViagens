@@ -56,9 +56,9 @@ class AdapterViagem(val fragment: ListaViagemFragment) : RecyclerView.Adapter<Ad
                 textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.dataFim ?: ""
                 textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.dataInicio ?: ""
                 textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.tipoMala ?: ""
-                textViewPassageiros.text = listaviagem?.Passageiro?.nome ?: ""
-                textViewPassageiros.text = listaviagem?.Passageiro?.genero ?: ""
-                textViewPassageiros.text = listaviagem?.Passageiro?.idade.toString() ?: ""
+                textViewPassageiros.text = listaviagem?.passageiro?.nome ?: ""
+                textViewPassageiros.text = listaviagem?.passageiro?.genero ?: ""
+                textViewPassageiros.text = listaviagem?.passageiro?.idade.toString() ?: ""
             }
 
 

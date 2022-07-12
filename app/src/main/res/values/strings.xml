@@ -24,4 +24,6 @@
     <string name="cal_ado">Calçado</string>
     <string name="lista_de_viagem">Lista de Viagem</string>
     <string name="name">Name</string>
+    <string name="guardar">guardar</string>
+    <string name="cancelar">cancelar</string>
 </resources>

@@ -4,7 +4,8 @@ package com.example.projetoprogramacaoavancada
 import android.database.sqlite.SQLiteDatabase
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,7 +18,7 @@ class BDTeste {
 
     @Before
     fun apagaBaseDados() {
-        appContext().deleteDatabase(BDViagemOpenHelper.NOME)
+        //appContext().deleteDatabase(BDViagemOpenHelper.NOME)
     }
 
     @Test
@@ -67,9 +68,9 @@ class BDTeste {
         val db = getWritableDataBase()
         val passageiro = Passageiro("Luís", "Masculino", 49)
         inserirPassageiro(db, passageiro)
-        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiro.id)
+        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiro)
         inserirInfoViagem(db, infoviagemBilhete)
-        val listaViagem = Lista_Viagem("Portugal","calças", "colar", "computador", "pensos", "Sapatilhas", 0, 0)
+        val listaViagem = Lista_Viagem("Portugal","calças", "colar", "computador", "pensos", "Sapatilhas", passageiro, infoviagemBilhete)
         inserirListaViagem(db, listaViagem)
 
         db.close()
@@ -84,7 +85,7 @@ class BDTeste {
         val db = getWritableDataBase()
         val passageiro = Passageiro("Luís", "Masculino", 49)
         inserirPassageiro(db, passageiro)
-        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiro.id)
+        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiro)
         inserirInfoViagem(db, infoviagemBilhete)
         db.close()
     }
@@ -95,7 +96,7 @@ class BDTeste {
         val passageiroLuis = Passageiro("Luís", "Masculino", 49)
         inserirPassageiro(db, passageiroLuis)
 
-        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiroLuis.id)
+        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiroLuis)
         inserirInfoViagem(db, infoviagemBilhete)
 
         infoviagemBilhete.dataInicio = "20/07/2024"
@@ -104,7 +105,7 @@ class BDTeste {
         infoviagemBilhete.localDestino = "Madeira"
         infoviagemBilhete.tipoMala = "porão"
         infoviagemBilhete.classViagem = "2ª Class"
-        infoviagemBilhete.idPassageiro = passageiroLuis.id
+        infoviagemBilhete.passageiro = passageiroLuis
 
         val registosAlterados = Tabela_Info_Viagem_Bilhete(db).update(
             infoviagemBilhete.toContentValues(),
@@ -120,7 +121,7 @@ class BDTeste {
         val db = getWritableDataBase()
         val passageiroLuis = Passageiro("Luís", "Masculino", 49)
         inserirPassageiro(db, passageiroLuis)
-        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiroLuis.id)
+        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiroLuis)
         inserirInfoViagem(db, infoviagemBilhete)
 
         val registosEliminados = Tabela_Info_Viagem_Bilhete(db).delete(
@@ -212,7 +213,7 @@ class BDTeste {
         inserirPassageiro(db, passageiro)
 
         val registosEliminados = Tabela_Passageiro(db).delete(
-            "${Tabela_Passageiro.ID_PASSAGEIRO}=?",
+            "${Tabela_Passageiro.CAMPO_ID}=?",
             arrayOf("${passageiro.id}")
         )
         assertEquals(1, registosEliminados)
@@ -224,11 +225,11 @@ class BDTeste {
         val db = getWritableDataBase()
         val passageiro = Passageiro("Luís", "Masculino", 49)
         inserirPassageiro(db, passageiro)
-        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiro.id)
+        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiro)
         inserirInfoViagem(db, infoviagemBilhete)
         val listaViagem = Lista_Viagem("viagem 1","calças",
             "óculos", "pc",
-            "pensos", "sapatilhas", 0, 0)
+            "pensos", "sapatilhas", passageiro, infoviagemBilhete)
         inserirListaViagem(db, listaViagem)
 
         listaViagem.nome_lista = "Madeira"
@@ -237,8 +238,8 @@ class BDTeste {
         listaViagem.eletronico = "computador"
         listaViagem.higiene = "pasta de dentes"
         listaViagem.higiene = "calisola\n calções\n cuecas"
-        listaViagem.idPassageiro = passageiro.id
-        listaViagem.idInfoViagem = infoviagemBilhete.id
+        listaViagem.passageiro = passageiro
+        listaViagem.InfoViagem = infoviagemBilhete
 
         val registosAlterados = TabelaListaViagem(db).update(
             listaViagem.toContentValues(),
@@ -254,11 +255,11 @@ class BDTeste {
         val db = getWritableDataBase()
         val passageiro = Passageiro("Luís", "Masculino", 49)
         inserirPassageiro(db, passageiro)
-        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiro.id)
+        val infoviagemBilhete = InfoViagemBilhete("24/06/2022", "30/06/2022", "Portugal", "Barcelona", "de mão","1º class", passageiro)
         inserirInfoViagem(db, infoviagemBilhete)
         val listaViagem = Lista_Viagem("viagem 1","calças",
             "óculos", "pc",
-            "pensos", "sapatilhas", 0, 0)
+            "pensos", "sapatilhas", passageiro, infoviagemBilhete)
         inserirListaViagem(db, listaViagem)
 
         val registoEliminado = TabelaListaViagem(db).delete(
