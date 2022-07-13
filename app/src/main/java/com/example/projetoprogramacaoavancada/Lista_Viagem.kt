@@ -5,25 +5,25 @@ import android.database.Cursor
 import android.provider.BaseColumns
 
 data class Lista_Viagem(
-    var nomeLista : String,
+    var nome_lista : String,
     var roupa : String,
     var acessorios : String,
-    var acessoriosInformaticos : String,
-    var produtosHigienicos : String,
-    var calcados : String,
-    var Passageiro : Passageiro,
+    var eletronico : String,
+    var higiene : String,
+    var calcado : String,
+    var passageiro : Passageiro,
     var InfoViagem : InfoViagemBilhete,
     var id : Long = -1
 ) {
     fun toContentValues() : ContentValues{
         val valoresLista = ContentValues()
-        valoresLista.put(TabelaListaViagem.CAMPO_NOME, nomeLista)
+        valoresLista.put(TabelaListaViagem.CAMPO_NOME, nome_lista)
         valoresLista.put(TabelaListaViagem.ACESSORIO, acessorios)
-        valoresLista.put(TabelaListaViagem.CALCADO, calcados)
-        valoresLista.put(TabelaListaViagem.ELETRONICO, acessoriosInformaticos)
-        valoresLista.put(TabelaListaViagem.HIGIENE, produtosHigienicos)
+        valoresLista.put(TabelaListaViagem.CALCADO, calcado)
+        valoresLista.put(TabelaListaViagem.ELETRONICO, eletronico)
+        valoresLista.put(TabelaListaViagem.HIGIENE, higiene)
         valoresLista.put(TabelaListaViagem.ROUPA, roupa)
-        valoresLista.put(TabelaListaViagem.PASSAGEIRO_ID, Passageiro.id)
+        valoresLista.put(TabelaListaViagem.PASSAGEIRO_ID, passageiro.id)
         valoresLista.put(TabelaListaViagem.INFOVIAGEM_ID, InfoViagem.id)
 
         return valoresLista
@@ -34,13 +34,13 @@ data class Lista_Viagem(
         fun fromCursor(cursor: Cursor): Lista_Viagem{
             val posId = cursor.getColumnIndex(BaseColumns._ID)
             val posNome = cursor.getColumnIndex(TabelaListaViagem.CAMPO_NOME)
-            val posRoupa = cursor.getColumnIndex(TabelaListaViagem.ROUPA)
             val posAcessorio = cursor.getColumnIndex(TabelaListaViagem.ACESSORIO)
+            val posCalcado = cursor.getColumnIndex(TabelaListaViagem.CALCADO)
             val posEletronico = cursor.getColumnIndex(TabelaListaViagem.ELETRONICO)
             val posHigiene = cursor.getColumnIndex(TabelaListaViagem.HIGIENE)
-            val posCalcado = cursor.getColumnIndex(TabelaListaViagem.CALCADO)
+            val posRoupa = cursor.getColumnIndex(TabelaListaViagem.ROUPA)
             val posIdPassageiro = cursor.getColumnIndex(TabelaListaViagem.PASSAGEIRO_ID)
-            val posNomePassageiro = cursor.getColumnIndex(Tabela_Passageiro.CAMPO_NOME_PASSAGEIRO)
+            val posNomePassageiro = cursor.getColumnIndex(Tabela_Passageiro.CAMPO_NOME)
             val posGenero = cursor.getColumnIndex(Tabela_Passageiro.GENERO)
             val posIdade = cursor.getColumnIndex(Tabela_Passageiro.IDADE)
             val posIdInfoViagem = cursor.getColumnIndex(TabelaListaViagem.INFOVIAGEM_ID)
@@ -52,22 +52,18 @@ data class Lista_Viagem(
             val posClass = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.CLASS_VIAGEM)
 
             val id = cursor.getLong(posId)
-            val nomeLista = cursor.getString(posNome)
-            val roupa = cursor.getString(posRoupa)
-            val acessorios = cursor.getString(posAcessorio)
-            val acessoriosInformaticos = cursor.getString(posEletronico)
+            val nome = cursor.getString(posNome)
+            val acessorio = cursor.getString(posAcessorio)
+            val calcado = cursor.getString(posCalcado)
+            val eletronico = cursor.getString(posEletronico)
             val higiene = cursor.getString(posHigiene)
-            val calcados = cursor.getString(posCalcado)
+            val roupa = cursor.getString(posRoupa)
 
-
-
-
-
-            val idPassageiro = cursor.getLong(posIdPassageiro)
+            val campoIdPassageiro = cursor.getLong(posIdPassageiro)
             val nomePassageiro = cursor.getString(posNomePassageiro)
             val generoPassageiro = cursor.getString(posGenero)
             val idadePassageiro = cursor.getLong(posIdade)
-            val Passageiro = Passageiro(nomePassageiro, generoPassageiro, idadePassageiro, idPassageiro)
+            val passageiro = Passageiro(nomePassageiro, generoPassageiro, idadePassageiro, campoIdPassageiro)
 
             val idInfoBilhete = cursor.getLong(posIdInfoViagem)
             val localDestino = cursor.getString(posLocalDestino)
@@ -76,9 +72,9 @@ data class Lista_Viagem(
             val dataFim = cursor.getString(posDataFim)
             val tipoMala = cursor.getString(posTipoMala)
             val classViagem = cursor.getString(posClass)
-            val InfoViagem = InfoViagemBilhete(dataInicio, dataFim, localDestino, localOrigem, tipoMala, classViagem, Passageiro, idInfoBilhete)
+            val InfoViagem = InfoViagemBilhete(dataInicio, dataFim, localDestino, localOrigem, tipoMala, classViagem, passageiro, idInfoBilhete)
 
-            return Lista_Viagem(nomeLista, acessorios, calcados, acessoriosInformaticos, higiene, roupa, Passageiro, InfoViagem, id)
+            return Lista_Viagem(nome, acessorio, calcado, eletronico, higiene, roupa, passageiro, InfoViagem, id)
         }
     }
 }
