@@ -59,7 +59,7 @@ class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor
             Tabela_Passageiro.TODAS_COLUNAS,
             null,
             null,
-            Tabela_Passageiro.CAMPO_NOME_PASSAGEIRO
+            Tabela_Passageiro.CAMPO_NOME
         )
 
 
