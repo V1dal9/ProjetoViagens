@@ -34,21 +34,21 @@ class TabelaListaViagem (db:SQLiteDatabase):TabelaBD(db, NOME) {
         val queryBuilderPassageiros = SQLiteQueryBuilder()
         queryBuilderPassageiros.tables = "$NOME INNER JOIN ${Tabela_Passageiro.NOME} ON ${Tabela_Passageiro.NOME}.${BaseColumns._ID} = $PASSAGEIRO_ID"
 
-        val queryBuilderInfoBilhete = SQLiteQueryBuilder()
-        queryBuilderInfoBilhete.tables = "$NOME INNER JOIN ${Tabela_Info_Viagem_Bilhete.NOME} ON ${Tabela_Info_Viagem_Bilhete.NOME}.${BaseColumns._ID} = $INFOVIAGEM_ID"
 
+        val queryBuilderViagemBilhete = SQLiteQueryBuilder()
+        queryBuilderViagemBilhete.tables = "$NOME INNER JOIN ${Tabela_Info_Viagem_Bilhete.NOME} ON ${Tabela_Info_Viagem_Bilhete.NOME}.${BaseColumns._ID} = $INFOVIAGEM_ID"
         return queryBuilderPassageiros.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
-        return queryBuilderInfoBilhete.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
+        return queryBuilderViagemBilhete.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
     }
 
     companion object{
         const val NOME = "ListaViagem"
 
         const val ID_LISTA = "$NOME.${BaseColumns._ID}"
-        const val CAMPO_NOME = "nomeLista"
-        const val ROUPA = "roupa"
-        const val CALCADO = "calcados"
-        const val ACESSORIO = "acessorios"
+        const val CAMPO_NOME = "nome"
+        const val ROUPA = "roupas"
+        const val CALCADO = "calçados"
+        const val ACESSORIO = "accessories"
         const val ELETRONICO = "acessoriosInformaticos"
         const val HIGIENE = "produtosHigienicos"
         const val PASSAGEIRO_ID  = "passageiroID"

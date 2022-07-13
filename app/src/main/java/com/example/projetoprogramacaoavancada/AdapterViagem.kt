@@ -23,18 +23,17 @@ class AdapterViagem(val fragment: ListaViagemFragment) : RecyclerView.Adapter<Ad
 
 
         val textViewNomeViagem = itemViagem.findViewById<TextView>(R.id.textViewNomeViagem)
-        val textViewListaroupa = itemViagem.findViewById<TextView>(R.id.textViewRoupas)
-        val textViewListaAcessorios = itemViagem.findViewById<TextView>(R.id.textViewAcessorios)
-
+        val textViewPassageiros = itemViagem.findViewById<TextView>(R.id.textViewPassageiros)
         /*val textViewOrigem = itemViagem.findViewById<TextView>(R.id.textViewOrigem)
         val textViewDestino = itemViagem.findViewById<TextView>(R.id.textViewDestino)
         val textViewDataInicio = itemViagem.findViewById<TextView>(R.id.textViewData_inicio)
         val textViewDataFim = itemViagem.findViewById<TextView>(R.id.textViewData_fim)*/
-        val textViewListaeletronico = itemViagem.findViewById<TextView>(R.id.textViewEletronicos)
-        val textViewListahigiene = itemViagem.findViewById<TextView>(R.id.textViewHigiene)
-        val textViewListacalcado = itemViagem.findViewById<TextView>(R.id.textViewCalcado)
-        val textViewPassageiros = itemViagem.findViewById<TextView>(R.id.textViewPassageiros)
-        val textViewBilheteInfoClass = itemViagem.findViewById<TextView>(R.id.textView)
+        val textViewListaAcessórios = itemViagem.findViewById<TextView>(R.id.textViewListalevar)
+        val textViewListacalcado = itemViagem.findViewById<TextView>(R.id.textViewListalevar2)
+        val textViewListaeletronico = itemViagem.findViewById<TextView>(R.id.textViewListalevar3)
+        val textViewListahigiene = itemViagem.findViewById<TextView>(R.id.textViewListalevar4)
+        val textViewListaroupa = itemViagem.findViewById<TextView>(R.id.textViewListalevar5)
+        val textViewBilheteInfoClass = itemViagem.findViewById<TextView>(R.id.textViewBilhete_info_class)
 
         init {
             itemViagem.setOnClickListener(this)
@@ -44,25 +43,22 @@ class AdapterViagem(val fragment: ListaViagemFragment) : RecyclerView.Adapter<Ad
             get() = field
             set(value: Lista_Viagem?){
                 field = value
-                textViewNomeViagem.text = listaviagem?.nomeLista ?: ""
+
+                textViewListaAcessórios.text = listaviagem?.acessorios ?: ""
+                textViewListacalcado.text = listaviagem?.calcado ?: ""
+                textViewListaeletronico.text = listaviagem?.eletronico ?: ""
+                textViewListahigiene.text = listaviagem?.higiene ?: ""
                 textViewListaroupa.text = listaviagem?.roupa ?: ""
-                textViewListaAcessorios.text = listaviagem?.acessorios ?: ""
-                textViewListaeletronico.text = listaviagem?.acessoriosInformaticos ?: ""
-                textViewListahigiene.text = listaviagem?.produtosHigienicos ?: ""
-                textViewListacalcado.text = listaviagem?.calcados ?: ""
-
-
-
-
+                textViewNomeViagem.text = listaviagem?.nome_lista ?: ""
                 textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.classViagem ?: ""
                 textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.localDestino ?: ""
                 textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.localOrigem ?: ""
                 textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.dataFim ?: ""
                 textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.dataInicio ?: ""
                 textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.tipoMala ?: ""
-                textViewPassageiros.text = listaviagem?.Passageiro?.namePassageiro ?: ""
-                textViewPassageiros.text = listaviagem?.Passageiro?.genero ?: ""
-                textViewPassageiros.text = listaviagem?.Passageiro?.idade.toString() ?: ""
+                textViewPassageiros.text = listaviagem?.passageiro?.nome ?: ""
+                textViewPassageiros.text = listaviagem?.passageiro?.genero ?: ""
+                textViewPassageiros.text = listaviagem?.passageiro?.idade.toString() ?: ""
             }
 
 
