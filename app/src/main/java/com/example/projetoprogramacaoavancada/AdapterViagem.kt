@@ -24,16 +24,16 @@ class AdapterViagem(val fragment: ListaViagemFragment) : RecyclerView.Adapter<Ad
 
         val textViewNomeViagem = itemViagem.findViewById<TextView>(R.id.textViewNomeViagem)
         val textViewPassageiros = itemViagem.findViewById<TextView>(R.id.textViewPassageiros)
-        /*val textViewOrigem = itemViagem.findViewById<TextView>(R.id.textViewOrigem)
-        val textViewDestino = itemViagem.findViewById<TextView>(R.id.textViewDestino)
+        val textViewOrigem = itemViagem.findViewById<TextView>(R.id.textViewOrigem)
+        val textViewDestino = itemViagem.findViewById<TextView>(R.id.textViewData_inicio)
         val textViewDataInicio = itemViagem.findViewById<TextView>(R.id.textViewData_inicio)
-        val textViewDataFim = itemViagem.findViewById<TextView>(R.id.textViewData_fim)*/
-        val textViewListaAcessórios = itemViagem.findViewById<TextView>(R.id.textViewListalevar)
-        val textViewListacalcado = itemViagem.findViewById<TextView>(R.id.textViewListalevar2)
-        val textViewListaeletronico = itemViagem.findViewById<TextView>(R.id.textViewListalevar3)
-        val textViewListahigiene = itemViagem.findViewById<TextView>(R.id.textViewListalevar4)
-        val textViewListaroupa = itemViagem.findViewById<TextView>(R.id.textViewListalevar5)
-        val textViewBilheteInfoClass = itemViagem.findViewById<TextView>(R.id.textViewBilhete_info_class)
+        val textViewDataFim = itemViagem.findViewById<TextView>(R.id.textViewData_fim)
+        val textViewListaAcessórios = itemViagem.findViewById<TextView>(R.id.textViewAcessorios)
+        val textViewListacalcado = itemViagem.findViewById<TextView>(R.id.textViewCalcado)
+        val textViewListaeletronico = itemViagem.findViewById<TextView>(R.id.textViewEletronicos)
+        val textViewListahigiene = itemViagem.findViewById<TextView>(R.id.textViewHigiene)
+        val textViewListaroupa = itemViagem.findViewById<TextView>(R.id.textViewRoupas)
+        val textViewBilheteInfoClass = itemViagem.findViewById<TextView>(R.id.textViewInfoClass)
 
         init {
             itemViagem.setOnClickListener(this)
