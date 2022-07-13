@@ -68,7 +68,7 @@ class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
             Tabela_Passageiro.TODAS_COLUNAS,
             null,
             null,
-            "${Tabela_Passageiro.CAMPO_NOME_PASSAGEIRO}"
+            Tabela_Passageiro.CAMPO_NOME
         )
 
 
@@ -91,7 +91,7 @@ class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
                 true
             }
-            R.id.action_edit -> true
+            R.id.action_eliminar -> true
             else -> false
 
         }

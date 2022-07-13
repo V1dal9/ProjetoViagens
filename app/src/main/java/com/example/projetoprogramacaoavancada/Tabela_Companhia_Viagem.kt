@@ -23,7 +23,7 @@ class Tabela_Companhia_Viagem(db: SQLiteDatabase): TabelaBD(db, NOME) {
         orderBy: String?
     ): Cursor {
         val queryBuilder = SQLiteQueryBuilder()
-        queryBuilder.tables = "$NOME INNER JOIN ${Tabela_Passageiro.NOME} ON ${Tabela_Passageiro.ID_PASSAGEIRO} = $PASSAGEIRO_ID"
+        queryBuilder.tables = "$NOME INNER JOIN ${Tabela_Passageiro.NOME} ON ${Tabela_Passageiro.CAMPO_ID} = $PASSAGEIRO_ID"
 
         return queryBuilder.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
 

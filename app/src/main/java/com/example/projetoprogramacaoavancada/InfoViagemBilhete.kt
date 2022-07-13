@@ -35,7 +35,7 @@ class InfoViagemBilhete(
             val posTipoMala = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.TIPO_MALA)
             val posClassViagem = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.CLASS_VIAGEM)
             val posIdPassageiro = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.PASSAGEIRO_ID)
-            val posNomePassageiro = cursor.getColumnIndex(Tabela_Passageiro.CAMPO_NOME_PASSAGEIRO)
+            val posNomePassageiro = cursor.getColumnIndex(Tabela_Passageiro.CAMPO_NOME)
             val posGenero = cursor.getColumnIndex(Tabela_Passageiro.GENERO)
             val posIdade = cursor.getColumnIndex(Tabela_Passageiro.IDADE)
 
