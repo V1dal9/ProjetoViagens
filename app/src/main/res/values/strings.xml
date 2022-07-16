@@ -26,4 +26,14 @@
     <string name="name">Name</string>
     <string name="guardar">guardar</string>
     <string name="cancelar">cancelar</string>
+    <string name="eletronicos">Eletronicos</string>
+    <string name="class_viagem">Class Viagem</string>
+    <string name="info_class">Info Class</string>
+    <string name="local_origem">Local Origem</string>
+    <string name="data_inicio">Data Inicio</string>
+    <string name="data_final">Data Final</string>
+    <string name="acessorios">Acessórios</string>
+    <string name="calcado">Calçado</string>
+    <string name="passageiros">Passageiros</string>
+    <string name="nome_viagem">Nome Viagem</string>
 </resources>
