@@ -11,8 +11,8 @@ data class Lista_Viagem(
     var eletronico : String,
     var higiene : String,
     var calcado : String,
-    var passageiro : Passageiro,
-    var InfoViagem : InfoViagemBilhete,
+    var passageiro : Passageiro? = null,
+    var InfoViagem : InfoViagemBilhete? = null,
     var id : Long = -1
 ) {
     fun toContentValues() : ContentValues{
@@ -23,8 +23,8 @@ data class Lista_Viagem(
         valoresLista.put(TabelaListaViagem.ELETRONICO, eletronico)
         valoresLista.put(TabelaListaViagem.HIGIENE, higiene)
         valoresLista.put(TabelaListaViagem.ROUPA, roupa)
-        valoresLista.put(TabelaListaViagem.PASSAGEIRO_ID, passageiro.id)
-        valoresLista.put(TabelaListaViagem.INFOVIAGEM_ID, InfoViagem.id)
+        valoresLista.put(TabelaListaViagem.PASSAGEIRO_ID, passageiro?.id)
+        valoresLista.put(TabelaListaViagem.INFOVIAGEM_ID, InfoViagem?.id)
 
         return valoresLista
 
@@ -72,7 +72,7 @@ data class Lista_Viagem(
             val dataFim = cursor.getString(posDataFim)
             val tipoMala = cursor.getString(posTipoMala)
             val classViagem = cursor.getString(posClass)
-            val InfoViagem = InfoViagemBilhete(dataInicio, dataFim, localDestino, localOrigem, tipoMala, classViagem, passageiro, idInfoBilhete)
+            val InfoViagem= InfoViagemBilhete(dataInicio, dataFim, localDestino, localOrigem, tipoMala, classViagem, passageiro, idInfoBilhete)
 
             return Lista_Viagem(nome, acessorio, calcado, eletronico, higiene, roupa, passageiro, InfoViagem, id)
         }
