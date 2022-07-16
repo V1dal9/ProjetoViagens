@@ -146,7 +146,7 @@ class ContentProviderViagem : ContentProvider() {
         private const val MULTIPLOS_REGISTOS = "vnd.android.cursor.dir"
 
         private val ENDERCO_BASE = Uri.parse("content://$AUTHORITY")
-        val ENDERECO_PASSAGEIRO = Uri.withAppendedPath(ENDERCO_BASE, Tabela_Passageiro.NOME)
+
         val ENDERECO_LISTA = Uri.withAppendedPath(ENDERCO_BASE, TabelaListaViagem.NOME)
         fun getUriMatcher() : UriMatcher {
             var uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
