@@ -18,7 +18,7 @@ class Tabela_Passageiro(db: SQLiteDatabase): TabelaBD(db, NOME) {
         const val IDADE = "idade"
         const val CAMPO_ID = "$NOME.${BaseColumns._ID}"
 
-        val TODAS_COLUNAS = arrayOf(CAMPO_ID, CAMPO_NOME)
+        val TODAS_COLUNAS = arrayOf(CAMPO_ID, CAMPO_NOME, GENERO, IDADE)
     }
 
 

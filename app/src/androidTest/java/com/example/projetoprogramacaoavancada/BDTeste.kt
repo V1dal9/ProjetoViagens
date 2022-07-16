@@ -105,7 +105,7 @@ class BDTeste {
         infoviagemBilhete.localDestino = "Madeira"
         infoviagemBilhete.tipoMala = "porão"
         infoviagemBilhete.classViagem = "2ª Class"
-        infoviagemBilhete.passageiro = passageiroLuis
+        infoviagemBilhete.Passageiro = passageiroLuis
 
         val registosAlterados = Tabela_Info_Viagem_Bilhete(db).update(
             infoviagemBilhete.toContentValues(),
