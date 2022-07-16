@@ -33,12 +33,14 @@ class PassageiroFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
-
+        adapterPassageiro!!.cursor = data
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
-
+        if(_binding == null) return
+        adapterPassageiro!!.cursor = null
     }
+
 
 
 
