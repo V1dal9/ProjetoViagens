@@ -110,11 +110,11 @@ class ContentProviderViagem : ContentProvider() {
         val id = uri.lastPathSegment
 
         val registosAlterados = when (getUriMatcher().match(uri)) {
-            URI_LISTA_ESPECIFICA -> TabelaListaViagem(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
-            URI_PASSAGEIRO_ESPECIFICO -> Tabela_Passageiro(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
-            URI_COMPANHIA_ESPECIFICA -> Tabela_Companhia_Viagem(db).delete("${BaseColumns._ID} = ?", arrayOf("${id}"))
-            URI_BILHETE_ESPECIFICA -> Tabela_Info_Viagem_Bilhete(db).delete("${BaseColumns._ID} = ?", arrayOf("${id}"))
-            URI_LOCAL_ESPECIFICA -> Tabela_Info_Viagem_Bilhete(db).delete("${BaseColumns._ID} = ?", arrayOf("${id}"))
+            URI_LISTA_ESPECIFICA -> TabelaListaViagem(db).update(values,"${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_PASSAGEIRO_ESPECIFICO -> Tabela_Passageiro(db).update(values,"${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_COMPANHIA_ESPECIFICA -> Tabela_Companhia_Viagem(db).update(values,"${BaseColumns._ID} = ?", arrayOf("${id}"))
+            URI_BILHETE_ESPECIFICA -> Tabela_Info_Viagem_Bilhete(db).update(values,"${BaseColumns._ID} = ?", arrayOf("${id}"))
+            URI_LOCAL_ESPECIFICA -> Tabela_Info_Viagem_Bilhete(db).update(values,"${BaseColumns._ID} = ?", arrayOf("${id}"))
             else -> 0
         }
 
@@ -149,7 +149,7 @@ class ContentProviderViagem : ContentProvider() {
 
         val ENDERECO_LISTA = Uri.withAppendedPath(ENDERCO_BASE, TabelaListaViagem.NOME)
         fun getUriMatcher() : UriMatcher {
-            var uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
+            val uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
 
             uriMatcher.addURI(AUTHORITY, Tabela_Passageiro.NOME, URI_PASSAGEIRO)
             uriMatcher.addURI(AUTHORITY, "${Tabela_Passageiro.NOME}/#", URI_PASSAGEIRO_ESPECIFICO)
