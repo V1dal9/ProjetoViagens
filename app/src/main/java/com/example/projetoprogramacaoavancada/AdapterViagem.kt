@@ -1,6 +1,7 @@
 package com.example.projetoprogramacaoavancada
 
 import android.database.Cursor
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -18,33 +19,27 @@ class AdapterViagem(val fragment: ListaViagemFragment) : RecyclerView.Adapter<Ad
 
     var viewHolderSelecionado : ViewHolderViagem? = null
 
-    inner class ViewHolderViagem(itemViagem : View) : RecyclerView.ViewHolder(itemViagem),
-        View.OnClickListener {
+    inner class ViewHolderViagem(itemViagem : View) : RecyclerView.ViewHolder(itemViagem), View.OnClickListener{
 
-
-        val textViewNomeViagem = itemViagem.findViewById<TextView>(R.id.textViewNomeViagem)
-        val textViewPassageiros = itemViagem.findViewById<TextView>(R.id.textViewPassageiros)
-        val textViewOrigem = itemViagem.findViewById<TextView>(R.id.textViewOrigem)
-        val textViewDestino = itemViagem.findViewById<TextView>(R.id.textViewData_inicio)
-        val textViewDataInicio = itemViagem.findViewById<TextView>(R.id.textViewData_inicio)
-        val textViewDataFim = itemViagem.findViewById<TextView>(R.id.textViewData_fim)
-        val textViewListaAcessórios = itemViagem.findViewById<TextView>(R.id.textViewAcessorios)
-        val textViewListacalcado = itemViagem.findViewById<TextView>(R.id.textViewCalcado)
-        val textViewListaeletronico = itemViagem.findViewById<TextView>(R.id.textViewEletronicos)
-        val textViewListahigiene = itemViagem.findViewById<TextView>(R.id.textViewHigiene)
-        val textViewListaroupa = itemViagem.findViewById<TextView>(R.id.textViewRoupas)
-        val textViewBilheteInfoClass = itemViagem.findViewById<TextView>(R.id.textViewInfoClass)
-
-        init {
-            itemViagem.setOnClickListener(this)
-        }
+        var textViewNomeViagem = itemViagem.findViewById<TextView>(R.id.textViewNomeViagem)
+        var textViewPassageiros = itemViagem.findViewById<TextView>(R.id.textViewPassageiros)
+        var textViewOrigem = itemViagem.findViewById<TextView>(R.id.textViewOrigem)
+        var textViewDestino = itemViagem.findViewById<TextView>(R.id.textViewData_inicio)
+        var textViewDataInicio = itemViagem.findViewById<TextView>(R.id.textViewData_inicio)
+        var textViewDataFim = itemViagem.findViewById<TextView>(R.id.textViewData_fim)
+        var textViewListaAcessorios = itemViagem.findViewById<TextView>(R.id.textViewAcessorios)
+        var textViewListacalcado = itemViagem.findViewById<TextView>(R.id.textViewCalcado)
+        var textViewListaeletronico = itemViagem.findViewById<TextView>(R.id.textViewEletronicos)
+        var textViewListahigiene = itemViagem.findViewById<TextView>(R.id.textViewHigiene)
+        var textViewListaroupa = itemViagem.findViewById<TextView>(R.id.textViewRoupas)
+        var textViewBilheteInfoClass = itemViagem.findViewById<TextView>(R.id.textViewInfoClass)
 
         var listaviagem : Lista_Viagem? = null
             get() = field
-            set(value: Lista_Viagem?){
+            set(value){
                 field = value
 
-                textViewListaAcessórios.text = listaviagem?.acessorios ?: ""
+                textViewListaAcessorios.text = listaviagem?.acessorios ?: ""
                 textViewListacalcado.text = listaviagem?.calcado ?: ""
                 textViewListaeletronico.text = listaviagem?.eletronico ?: ""
                 textViewListahigiene.text = listaviagem?.higiene ?: ""
@@ -58,8 +53,14 @@ class AdapterViagem(val fragment: ListaViagemFragment) : RecyclerView.Adapter<Ad
                 textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.tipoMala ?: ""
                 textViewPassageiros.text = listaviagem?.passageiro?.nome ?: ""
                 textViewPassageiros.text = listaviagem?.passageiro?.genero ?: ""
-                textViewPassageiros.text = listaviagem?.passageiro?.idade.toString() ?: ""
+                textViewPassageiros.text = listaviagem?.passageiro?.idade.toString()
             }
+
+        init {
+            itemViagem.setOnClickListener(this)
+        }
+
+
 
 
         override fun onClick(v : View?){
@@ -87,8 +88,10 @@ class AdapterViagem(val fragment: ListaViagemFragment) : RecyclerView.Adapter<Ad
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderViagem {
-        val itemViagem = fragment.layoutInflater.inflate(R.layout.item_viagem, parent, false)
-        return ViewHolderViagem(itemViagem)
+        //val itemViagem = fragment.layoutInflater.inflate(R.layout.item_viagem, parent, false)
+        //return ViewHolderViagem(itemViagem)
+        val view = LayoutInflater.from(parent.context)
+        return ViewHolderViagem(view.inflate(R.layout.item_viagem, parent, false))
     }
 
     override fun getItemCount(): Int {
