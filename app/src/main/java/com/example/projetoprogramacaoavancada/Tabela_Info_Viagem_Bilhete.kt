@@ -42,7 +42,7 @@ class Tabela_Info_Viagem_Bilhete (db: SQLiteDatabase): TabelaBD(db, NOME){
         const val CAMPO_ID = "$NOME.${BaseColumns._ID}"
         const val TIPO_MALA = "TipoMala"
         const val CLASS_VIAGEM = "ClassViagem"
-        const val PASSAGEIRO_ID = "passageiroID"
+        const val PASSAGEIRO_ID = "infoPassageiroID"
 
         val TODAS_COLUNAS = arrayOf(DATA_INICIO, DATA_FIM, LOCAL_ORIGEM, LOCAL_DESTINO, CAMPO_ID, PASSAGEIRO_ID)
     }
