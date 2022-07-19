@@ -32,20 +32,17 @@ class TabelaListaViagem (db:SQLiteDatabase):TabelaBD(db, NOME) {
         orderBy: String?
     ): Cursor {
         val queryBuilderPassageiros = SQLiteQueryBuilder()
-        queryBuilderPassageiros.tables = "$NOME INNER JOIN ${Tabela_Passageiro.NOME} ON ${Tabela_Passageiro.NOME}.${BaseColumns._ID} = $PASSAGEIRO_ID"
+        queryBuilderPassageiros.tables = "$NOME INNER JOIN ${Tabela_Passageiro.NOME} ON ${Tabela_Passageiro.NOME}.${BaseColumns._ID} = $PASSAGEIRO_ID INNER JOIN ${Tabela_Info_Viagem_Bilhete.NOME} ON ${Tabela_Info_Viagem_Bilhete.NOME}.${BaseColumns._ID} = $INFOVIAGEM_ID"
 
-
-        val queryBuilderViagemBilhete = SQLiteQueryBuilder()
-        queryBuilderViagemBilhete.tables = "$NOME INNER JOIN ${Tabela_Info_Viagem_Bilhete.NOME} ON ${Tabela_Info_Viagem_Bilhete.NOME}.${BaseColumns._ID} = $INFOVIAGEM_ID"
         return queryBuilderPassageiros.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
-        return queryBuilderViagemBilhete.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
+
     }
 
     companion object{
         const val NOME = "ListaViagem"
 
         const val ID_LISTA = "$NOME.${BaseColumns._ID}"
-        const val CAMPO_NOME = "nome"
+        const val CAMPO_NOME = "nomeListaViagem"
         const val ROUPA = "roupas"
         const val CALCADO = "calçados"
         const val ACESSORIO = "accessories"
