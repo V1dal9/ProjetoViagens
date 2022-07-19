@@ -55,7 +55,7 @@ class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> =
         CursorLoader(
             requireContext(),
-            ContentProviderViagem.ENDERECO_PASSAGEIRO,
+            ContentProviderViagem.ENDERECO_LISTA,
             Tabela_Passageiro.TODAS_COLUNAS,
             null,
             null,
