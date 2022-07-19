@@ -34,7 +34,7 @@ class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentListaViagemBinding.inflate(inflater, container, false)
         return binding.root
@@ -86,14 +86,21 @@ class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     fun processaOpcaoMenu(item: MenuItem) : Boolean =
         when(item.itemId){
             R.id.action_inserir -> {
-                findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+                val acao = ListaViagemFragmentDirections.actionListaViagemToEditarViagemFragment()
+                findNavController().navigate(acao)
+                (activity as MainActivity).atualizaNome("Inserir Nome")
                 true
             }
             R.id.action_edit -> {
+                val acao = ListaViagemFragmentDirections.actionListaViagemToEditarViagemFragment()
+                findNavController().navigate(acao)
+                (activity as MainActivity).atualizaNome("Alterar Viagem")
+                true
+            }
+            R.id.action_eliminar -> {
 
                 true
             }
-            R.id.action_eliminar -> true
             else -> false
 
         }
@@ -101,3 +108,5 @@ class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         const val ID_LOADER_LISTA = 0
     }
 }
+
+
