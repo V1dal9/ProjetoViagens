@@ -13,7 +13,7 @@ class PassageiroFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     get() = field
     set(value){
         field = value
-        (requireActivity() as MainActivity).mostraOpçãoAlterarEliminar(field != null)
+        (requireActivity() as MainActivity).mostraOpcaoAlterarEliminar(field != null)
     }
 
     private var _binding: FragmentPassageiroBinding? = null
