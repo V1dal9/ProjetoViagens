@@ -127,23 +127,23 @@ class ContentProviderViagem : ContentProvider() {
     companion object{
         private const val AUTHORITY = "com.example.projetoprogramacaoavancada"
 
-        private const val URI_PASSAGEIRO = 100
-        private const val URI_PASSAGEIRO_ESPECIFICO = 101
+        const val URI_PASSAGEIRO = 100
+        const val URI_PASSAGEIRO_ESPECIFICO = 101
 
-        private const val URI_LISTA_VIAGEM = 200
-        private const val URI_LISTA_ESPECIFICA = 201
+        const val URI_LISTA_VIAGEM = 200
+        const val URI_LISTA_ESPECIFICA = 201
 
-        private const val URI_COMPANHIA_VIAGEM = 300
-        private const val URI_COMPANHIA_ESPECIFICA = 301
+        const val URI_COMPANHIA_VIAGEM = 300
+        const val URI_COMPANHIA_ESPECIFICA = 301
 
-        private const val URI_BILHETE_VIAGEM = 400
-        private const val URI_BILHETE_ESPECIFICA = 401
+        const val URI_BILHETE_VIAGEM = 400
+        const val URI_BILHETE_ESPECIFICA = 401
 
-        private const val URI_LOCAL_VIAGEM = 500
-        private const val URI_LOCAL_ESPECIFICA = 501
+        const val URI_LOCAL_VIAGEM = 500
+        const val URI_LOCAL_ESPECIFICA = 501
 
-        private const val UNICO_REGISTO = "vnd.android.cursor.item"
-        private const val MULTIPLOS_REGISTOS = "vnd.android.cursor.dir"
+        const val UNICO_REGISTO = "vnd.android.cursor.item"
+        const val MULTIPLOS_REGISTOS = "vnd.android.cursor.dir"
 
         private val ENDERCO_BASE = Uri.parse("content://$AUTHORITY")
 
