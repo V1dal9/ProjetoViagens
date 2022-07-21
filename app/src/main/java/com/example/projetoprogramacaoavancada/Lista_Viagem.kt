@@ -39,10 +39,12 @@ data class Lista_Viagem(
             val posEletronico = cursor.getColumnIndex(TabelaListaViagem.ELETRONICO)
             val posHigiene = cursor.getColumnIndex(TabelaListaViagem.HIGIENE)
             val posRoupa = cursor.getColumnIndex(TabelaListaViagem.ROUPA)
+
             val posIdPassageiro = cursor.getColumnIndex(TabelaListaViagem.PASSAGEIRO_ID)
             val posNomePassageiro = cursor.getColumnIndex(Tabela_Passageiro.CAMPO_NOME)
             val posGenero = cursor.getColumnIndex(Tabela_Passageiro.GENERO)
             val posIdade = cursor.getColumnIndex(Tabela_Passageiro.IDADE)
+
             val posIdInfoViagem = cursor.getColumnIndex(TabelaListaViagem.INFOVIAGEM_ID)
             val posLocalDestino = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.LOCAL_DESTINO)
             val posLocalOrigem = cursor.getColumnIndex(Tabela_Info_Viagem_Bilhete.LOCAL_ORIGEM)
