@@ -36,4 +36,6 @@
     <string name="calcado">Calçado</string>
     <string name="passageiros">Passageiros</string>
     <string name="nome_viagem">Nome Viagem</string>
+    <string name="dados_do_passageiro">Dados do Passageiro</string>
+    <string name="mala">Mala</string>
 </resources>
