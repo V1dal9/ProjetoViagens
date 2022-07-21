@@ -61,8 +61,10 @@ class MainActivity : AppCompatActivity() {
             opcaoProcessada = (fragment as MenuInicialFragment).processaOpcaoMenu(item)
         } else if (fragment is ListaViagemFragment) {
             opcaoProcessada = (fragment as ListaViagemFragment).processaOpcaoMenu(item)
-        }/* else if (fragment is InserirInfoViagemFragment) {
-            opcaoProcessada = (fragment as InserirInfoViagemFragment).processaOpcaoMenu(item)
+        }else if (fragment is EditarInfoViagemFragment) {
+            opcaoProcessada = (fragment as EditarInfoViagemFragment).processaOpcaoMenu(item)
+        }/*else if(fragment is EliminarViagemFragment){
+            opcaoProcessada = (fragment as EliminarViagemFragment).processaOpcaoMenu(item)
         }*/else {
             opcaoProcessada = false
         }
@@ -77,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
-    fun mostraOpçãoAlterarEliminar(mostra: Boolean){
+    fun mostraOpcaoAlterarEliminar(mostra: Boolean){
         menu!!.findItem(R.id.action_edit).setVisible(mostra)
         menu!!.findItem(R.id.action_eliminar).setVisible(mostra)
     }
