@@ -33,6 +33,7 @@ class AdapterViagem(val fragment: ListaViagemFragment) : RecyclerView.Adapter<Ad
         var textViewListahigiene = itemViagem.findViewById<TextView>(R.id.textViewHigiene)
         var textViewListaroupa = itemViagem.findViewById<TextView>(R.id.textViewRoupas)
         var textViewBilheteInfoClass = itemViagem.findViewById<TextView>(R.id.textViewInfoClass)
+        var textViewTipoMala = itemViagem.findViewById<TextView>(R.id.textViewTipoMala)
 
         var listaviagem : Lista_Viagem? = null
             get() = field
@@ -46,11 +47,11 @@ class AdapterViagem(val fragment: ListaViagemFragment) : RecyclerView.Adapter<Ad
                 textViewListaroupa.text = listaviagem?.roupa ?: ""
                 textViewNomeViagem.text = listaviagem?.nome_lista ?: ""
                 textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.classViagem ?: ""
-                textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.localDestino ?: ""
-                textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.localOrigem ?: ""
-                textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.dataFim ?: ""
-                textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.dataInicio ?: ""
-                textViewBilheteInfoClass.text = listaviagem?.InfoViagem?.tipoMala ?: ""
+                textViewDestino.text = listaviagem?.InfoViagem?.localDestino ?: ""
+                textViewOrigem.text = listaviagem?.InfoViagem?.localOrigem ?: ""
+                textViewDataFim.text = listaviagem?.InfoViagem?.dataFim ?: ""
+                textViewDataInicio.text = listaviagem?.InfoViagem?.dataInicio ?: ""
+                textViewTipoMala.text = listaviagem?.InfoViagem?.tipoMala ?: ""
                 textViewPassageiros.text = listaviagem?.passageiro?.nome ?: ""
                 textViewPassageiros.text = listaviagem?.passageiro?.genero ?: ""
                 textViewPassageiros.text = listaviagem?.passageiro?.idade.toString()
