@@ -133,7 +133,7 @@ class BDTeste {
     }
 
     private fun inserirInfoViagem(db : SQLiteDatabase, infoViagemBilhete: InfoViagemBilhete){
-        Tabela_Info_Viagem_Bilhete(db).insert(infoViagemBilhete.toContentValues())
+        infoViagemBilhete.id = Tabela_Info_Viagem_Bilhete(db).insert(infoViagemBilhete.toContentValues())
     }
 
 
