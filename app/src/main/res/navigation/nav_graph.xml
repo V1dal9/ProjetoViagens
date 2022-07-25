@@ -14,6 +14,12 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/ListaViagem" />
+        <action
+            android:id="@+id/action_MenuInicial_to_passageiroFragment2"
+            app:destination="@id/passageiroFragment2" />
+        <action
+            android:id="@+id/action_MenuInicial_to_infoBilheteFragment"
+            app:destination="@id/infoBilheteFragment" />
     </fragment>
     <fragment
         android:id="@+id/ListaViagem"
@@ -35,5 +41,47 @@
         <action
             android:id="@+id/action_EditarViagemFragment_to_ListaViagem"
             app:destination="@id/ListaViagem" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarPassageirosFragment"
+        android:name="com.example.projetoprogramacaoavancada.EditarPassageirosFragment"
+        android:label="fragment_editar_passageiros"
+        tools:layout="@layout/fragment_editar_passageiros" >
+        <action
+            android:id="@+id/action_editarPassageirosFragment_to_passageiroFragment2"
+            app:destination="@id/passageiroFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/passageiroFragment2"
+        android:name="com.example.projetoprogramacaoavancada.PassageiroFragment2"
+        android:label="fragment_passageiro2"
+        tools:layout="@layout/fragment_passageiro2" >
+        <action
+            android:id="@+id/action_passageiroFragment2_to_MenuInicial"
+            app:destination="@id/MenuInicial" />
+        <action
+            android:id="@+id/action_passageiroFragment2_to_editarPassageirosFragment"
+            app:destination="@id/editarPassageirosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoBilheteFragment"
+        android:name="com.example.projetoprogramacaoavancada.InfoBilheteFragment"
+        android:label="fragment_info_bilhete"
+        tools:layout="@layout/fragment_info_bilhete" >
+        <action
+            android:id="@+id/action_infoBilheteFragment_to_MenuInicial"
+            app:destination="@id/MenuInicial" />
+        <action
+            android:id="@+id/action_infoBilheteFragment_to_editBilheteFragment"
+            app:destination="@id/editBilheteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editBilheteFragment"
+        android:name="com.example.projetoprogramacaoavancada.EditBilheteFragment"
+        android:label="fragment_edit_bilhete"
+        tools:layout="@layout/fragment_edit_bilhete" >
+        <action
+            android:id="@+id/action_editBilheteFragment_to_infoBilheteFragment"
+            app:destination="@id/infoBilheteFragment" />
     </fragment>
 </navigation>
