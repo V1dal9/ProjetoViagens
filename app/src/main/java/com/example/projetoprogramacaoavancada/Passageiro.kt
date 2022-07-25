@@ -3,7 +3,6 @@ package com.example.projetoprogramacaoavancada
 import android.content.ContentValues
 import android.database.Cursor
 import android.provider.BaseColumns
-import java.net.PasswordAuthentication
 
 data class Passageiro(
     var nome : String,
@@ -22,7 +21,7 @@ data class Passageiro(
     companion object{
         fun fromCursor(cursor: Cursor): Passageiro{
             val posId = cursor.getColumnIndex(BaseColumns._ID)
-            val posNome = cursor.getColumnIndex(Tabela_Passageiro.NOME)
+            val posNome = cursor.getColumnIndex(Tabela_Passageiro.CAMPO_NOME)
             val posGenero = cursor.getColumnIndex(Tabela_Passageiro.GENERO)
             val posIdade = cursor.getColumnIndex(Tabela_Passageiro.IDADE)
 
