@@ -7,7 +7,7 @@
     tools:context=".MenuInicialFragment">
 
     <Button
-        android:id="@+id/button_first"
+        android:id="@+id/button_VerTudo"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -20,14 +20,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonPassageiro"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/criar_lista_viagem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_first" />
+        android:text="@string/ver_passageiro"
+        app:layout_constraintEnd_toEndOf="@+id/button_VerTudo"
+        app:layout_constraintStart_toStartOf="@+id/button_VerTudo"
+        app:layout_constraintTop_toBottomOf="@+id/button_VerTudo" />
+
+    <Button
+        android:id="@+id/buttonInfoBilhete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/ver_bilhete"
+        app:layout_constraintEnd_toEndOf="@+id/buttonPassageiro"
+        app:layout_constraintStart_toStartOf="@+id/buttonPassageiro"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPassageiro" />
 </androidx.constraintlayout.widget.ConstraintLayout>
