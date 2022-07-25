@@ -38,4 +38,11 @@
     <string name="nome_viagem">Nome Viagem</string>
     <string name="dados_do_passageiro">Dados do Passageiro</string>
     <string name="mala">Mala</string>
+    <string name="ver_passageiro">Ver Passageiro</string>
+    <string name="ver_bilhete">Ver Bilhete</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nome_passageiro">Nome Passageiro</string>
+    <string name="g_nero">Género</string>
+    <string name="idade">Idade</string>
+    <string name="dados_passageiro">Dados Passageiro</string>
 </resources>
