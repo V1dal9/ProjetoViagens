@@ -38,10 +38,12 @@ class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        LoaderManager.getInstance(this).initLoader(ID_LOADER_LISTA_VIAGEM, null, this)
+
         val activity = activity as MainActivity
         activity.fragment = this
         activity.idMenuAtual = R.menu.menu_edita_lista
+
+        LoaderManager.getInstance(this).initLoader(ID_LOADER_LISTA_VIAGEM, null, this)
     }
 
     companion object{
@@ -57,23 +59,23 @@ class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor
         CursorLoader(
             requireContext(),
             ContentProviderViagem.ENDERECO_LISTA,
-            Tabela_Passageiro.TODAS_COLUNAS,
+            TabelaListaViagem.TODAS_COLUNAS,
             null,
             null,
-            Tabela_Passageiro.CAMPO_NOME
+            TabelaListaViagem.CAMPO_NOME
         )
 
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
-        val adapterGenero = SimpleCursorAdapter(
+        val adapterPassageiro = SimpleCursorAdapter(
           requireContext(),
           android.R.layout.simple_list_item_1,
           data,
-          arrayOf(Tabela_Passageiro.GENERO),
+          arrayOf(Tabela_Passageiro.CAMPO_NOME),
           intArrayOf(android.R.id.text1),
           0
         )
-        binding.spinnerPassageiro.adapter = adapterGenero
+        binding.spinnerPassageiro.adapter = adapterPassageiro
 
     }
 
