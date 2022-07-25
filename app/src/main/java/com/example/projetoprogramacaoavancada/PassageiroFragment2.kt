@@ -3,12 +3,14 @@ package com.example.projetoprogramacaoavancada
 import android.database.Cursor
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetoprogramacaoavancada.databinding.FragmentPassageiro2Binding
 
@@ -75,6 +77,29 @@ class PassageiroFragment2 : Fragment(), LoaderManager.LoaderCallbacks<Cursor>{
         if(_binding == null) return
         adapterPassageiro!!.cursor = null
     }
+
+    fun processaOpcaoMenu(item: MenuItem) : Boolean =
+        when(item.itemId) {
+            R.id.action_inserir -> {
+                val acao = PassageiroFragment2Directions.actionPassageiroFragment2ToEditarPassageirosFragment()
+                findNavController().navigate(acao)
+                (activity as MainActivity).atualizaNome("Inserir Passageiro")
+                true
+            }
+            R.id.action_edit -> {
+                /*val acao = PassageiroFragment2Directions.actionPassageiroFragment2ToEditarPassageirosFragment(passageiroSelecionado)
+                findNavController().navigate(acao)
+                (activity as MainActivity).atualizaNome("Alterar Passageiro")*/
+                true
+            }
+            R.id.action_eliminar -> {
+                //val acao = PassageiroFragment2Directions
+                //findNavController().navigate(acao)
+                true
+            }
+            else -> false
+        }
+
     companion object{
         const val ID_LOADER_PASSAGEIRO = 0
     }
