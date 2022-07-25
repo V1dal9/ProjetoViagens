@@ -32,7 +32,7 @@ class TabelaListaViagem (db:SQLiteDatabase):TabelaBD(db, NOME) {
         orderBy: String?
     ): Cursor {
         val queryBuilderPassageiros = SQLiteQueryBuilder()
-        queryBuilderPassageiros.tables = "$NOME INNER JOIN ${Tabela_Passageiro.NOME} ON ${Tabela_Passageiro.NOME}.${BaseColumns._ID} = $PASSAGEIRO_ID LEFT JOIN ${Tabela_Info_Viagem_Bilhete.NOME} ON ${Tabela_Info_Viagem_Bilhete.NOME}.${BaseColumns._ID} = $INFOVIAGEM_ID"
+        queryBuilderPassageiros.tables = "$NOME INNER JOIN ${Tabela_Passageiro.NOME} ON ${Tabela_Passageiro.NOME}.${BaseColumns._ID} = $PASSAGEIRO_ID INNER JOIN ${Tabela_Info_Viagem_Bilhete.NOME} ON ${Tabela_Info_Viagem_Bilhete.NOME}.${BaseColumns._ID} = $INFOVIAGEM_ID"
 
         return queryBuilderPassageiros.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
 
