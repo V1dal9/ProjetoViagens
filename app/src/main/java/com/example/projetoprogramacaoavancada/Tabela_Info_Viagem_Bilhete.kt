@@ -35,6 +35,7 @@ class Tabela_Info_Viagem_Bilhete (db: SQLiteDatabase): TabelaBD(db, NOME){
 
     companion object{
         const val NOME = "InfoBilhete"
+
         const val DATA_INICIO = "dataInicio"
         const val DATA_FIM = "dataFim"
         const val LOCAL_ORIGEM = "localEmbarque"
@@ -44,6 +45,19 @@ class Tabela_Info_Viagem_Bilhete (db: SQLiteDatabase): TabelaBD(db, NOME){
         const val CLASS_VIAGEM = "ClassViagem"
         const val PASSAGEIRO_ID = "infoPassageiroID"
 
-        val TODAS_COLUNAS = arrayOf(DATA_INICIO, DATA_FIM, LOCAL_ORIGEM, LOCAL_DESTINO, CAMPO_ID, PASSAGEIRO_ID)
+        val TODAS_COLUNAS = arrayOf(
+            DATA_INICIO,
+            DATA_FIM,
+            LOCAL_ORIGEM,
+            LOCAL_DESTINO,
+            CAMPO_ID,
+            CLASS_VIAGEM,
+            TIPO_MALA,
+            PASSAGEIRO_ID,
+            Tabela_Passageiro.CAMPO_NOME,
+            Tabela_Passageiro.IDADE,
+            Tabela_Passageiro.GENERO,
+            Tabela_Passageiro.CAMPO_ID
+        )
     }
 }
