@@ -15,9 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetoprogramacaoavancada.databinding.FragmentPassageiro2Binding
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class PassageiroFragment2 : Fragment(), LoaderManager.LoaderCallbacks<Cursor>{
     var passageiroSelecionado : Passageiro? = null
         get() = field
@@ -51,7 +48,7 @@ class PassageiroFragment2 : Fragment(), LoaderManager.LoaderCallbacks<Cursor>{
 
         val activity = activity as MainActivity
         activity.fragment = this
-        activity.idMenuAtual = R.menu.menu_edita_passageiro
+        activity.idMenuAtual = R.menu.menu_lista
     }
 
     override fun onDestroyView() {
@@ -87,9 +84,9 @@ class PassageiroFragment2 : Fragment(), LoaderManager.LoaderCallbacks<Cursor>{
                 true
             }
             R.id.action_edit -> {
-                /*val acao = PassageiroFragment2Directions.actionPassageiroFragment2ToEditarPassageirosFragment(passageiroSelecionado)
+                val acao = PassageiroFragment2Directions.actionPassageiroFragment2ToEditarPassageirosFragment()
                 findNavController().navigate(acao)
-                (activity as MainActivity).atualizaNome("Alterar Passageiro")*/
+                (activity as MainActivity).atualizaNome("Alterar Passageiro")
                 true
             }
             R.id.action_eliminar -> {
