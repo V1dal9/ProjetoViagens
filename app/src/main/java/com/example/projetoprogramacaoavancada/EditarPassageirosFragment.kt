@@ -94,11 +94,11 @@ class EditarPassageirosFragment : Fragment(), LoaderManager.LoaderCallbacks<Curs
     }
     fun processaOpcaoMenu(item: MenuItem) : Boolean =
         when(item.itemId) {
-            R.id.action_Save -> {
+            R.id.action_guardar -> {
                 guardar()
                 true
             }
-            R.id.action_back -> {
+            R.id.action_cancelar -> {
                 voltaListaPassageiro()
                 true
             }
