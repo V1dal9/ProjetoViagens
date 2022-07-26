@@ -8,13 +8,14 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SimpleCursorAdapter
-import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
 import com.example.projetoprogramacaoavancada.databinding.FragmentEditarPassageirosBinding
+import com.google.android.material.snackbar.Snackbar
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
@@ -40,13 +41,13 @@ class EditarPassageirosFragment : Fragment(), LoaderManager.LoaderCallbacks<Curs
 
         val activity = requireActivity() as MainActivity
         activity.fragment = this
-        activity.idMenuAtual = R.menu.menu_edita_passageiro
+        activity.idMenuAtual = R.menu.menu_edita_lista
 
         if(arguments != null){
             //passageiro = EditarPassageirosFragmentArgs.fromBundle(arguments!!).passageiro
 
             if(passageiro != null){
-                binding.textViewGenero
+                binding.editTextNomePassageiro.setText(passageiro!!.nome)
                 binding.textViewGenero.setText(passageiro!!.genero)
                 binding.textViewIdade.setText(passageiro!!.idade.toString())
             }
@@ -84,35 +85,35 @@ class EditarPassageirosFragment : Fragment(), LoaderManager.LoaderCallbacks<Curs
             intArrayOf(android.R.id.text1),
             0
         )
-        binding.spinnerPassageiroNome.adapter = adapterPassageiro
+
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
         if (_binding == null) return
-        binding.spinnerPassageiroNome.adapter = null
+
     }
     fun processaOpcaoMenu(item: MenuItem) : Boolean =
         when(item.itemId) {
-            R.id.action_guardar -> {
+            R.id.action_Save -> {
                 guardar()
                 true
             }
-            R.id.action_cancelar -> {
-                voltaListaLivros()
+            R.id.action_back -> {
+                voltaListaPassageiro()
                 true
             }
             else -> false
         }
 
-    private fun voltaListaLivros() {
-        findNavController().navigate(R.id.action_EditarViagemFragment_to_ListaViagem)
+    private fun voltaListaPassageiro() {
+        findNavController().navigate(R.id.action_editarPassageirosFragment_to_passageiroFragment2)
     }
 
     private fun guardar() {
-        val idPassageiro = binding.spinnerPassageiroNome.selectedItemId
-        if (idPassageiro == Spinner.INVALID_ROW_ID) {
-            binding.textView6.error = "Nome Obrigatório"
-            binding.spinnerPassageiroNome.requestFocus()
+        val NomePassageiro = binding.editTextNomePassageiro.text.toString()
+        if (NomePassageiro.isBlank()) {
+            binding.editTextNomePassageiro.error = "Nome Obrigatório"
+            binding.editTextNomePassageiro.requestFocus()
             return
         }
 
@@ -130,25 +131,24 @@ class EditarPassageirosFragment : Fragment(), LoaderManager.LoaderCallbacks<Curs
             return
         }
 
-        val livroGuardado =
+        val PassageiroGuardado =
             if (passageiro == null) {
-                //inserePassageiro()
+                inserePassageiro(NomePassageiro, genero, idade.toLong())
             } else {
-                //alteraPassageiro()
+                alteraPassageiro(NomePassageiro, genero, idade.toLong())
             }
 
-        /*if (livroGuardado) {
-            Toast.makeText(requireContext(), "Passageiro guardado com sucesso", Toast.LENGTH_LONG)
-                .show()
-            voltaListaLivros()
+        if (PassageiroGuardado) {
+            Toast.makeText(requireContext(), "Passageiro guardado com sucesso", Toast.LENGTH_LONG).show()
+            voltaListaPassageiro()
         } else {
-            Snackbar.make(binding.spinnerPassageiroNome, "Erro ao guardar o Passageiro", Snackbar.LENGTH_INDEFINITE).show()
+            Snackbar.make(binding.editTextNomePassageiro, "Erro ao guardar o Passageiro", Snackbar.LENGTH_INDEFINITE).show()
             return
-        }*/
+        }
     }
 
-    private fun alteraPassageiro(name: String, id: Long, genero: String, idade: Long) : Boolean {
-        val passageiro = Passageiro(name, genero, idade, id)
+    private fun alteraPassageiro(name: String, genero: String, idade: Long) : Boolean {
+        val passageiro = Passageiro(name, genero, idade)
 
         val enderecoPassageiro = Uri.withAppendedPath(ContentProviderPassageiro.ENDERECO_PASSAGEIRO, "${this.passageiro!!.id}")
 
@@ -157,8 +157,8 @@ class EditarPassageirosFragment : Fragment(), LoaderManager.LoaderCallbacks<Curs
         return registosAlterados == 1
     }
 
-    private fun inserePassageiro(nome: String, genero: String, idade: Long): Boolean {
-        val passageiro = Passageiro(genero, nome, idade)
+    private fun inserePassageiro(name: String, genero: String, idade: Long): Boolean {
+        val passageiro = Passageiro(name, genero, idade)
 
         val enderecoPassageiroInserido = requireActivity().contentResolver.insert(ContentProviderPassageiro.ENDERECO_PASSAGEIRO, passageiro.toContentValues())
 
