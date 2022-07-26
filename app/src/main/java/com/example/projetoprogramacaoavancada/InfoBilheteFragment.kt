@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projetoprogramacaoavancada.databinding.FragmentInfoBilheteBinding
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class InfoBilheteFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -53,8 +51,13 @@ class InfoBilheteFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
         val activity = activity as MainActivity
         activity.fragment = this
-        activity.idMenuAtual = R.menu.menu_bilhete
+        activity.idMenuAtual = R.menu.menu_lista
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> =
@@ -80,8 +83,7 @@ class InfoBilheteFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     fun processaOpcaoMenu(item: MenuItem): Boolean =
         when (item.itemId) {
             R.id.action_inserir -> {
-                val acao =
-                    InfoBilheteFragmentDirections.actionInfoBilheteFragmentToEditBilheteFragment()
+                val acao = InfoBilheteFragmentDirections.actionInfoBilheteFragmentToEditBilheteFragment()
                 findNavController().navigate(acao)
                 (activity as MainActivity).atualizaNome("Inserir Bilhete")
                 true
