@@ -1,7 +1,6 @@
 package com.example.projetoprogramacaoavancada
 
 import android.database.Cursor
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -24,6 +23,9 @@ class AdapterPassageiro(val fragment: PassageiroFragment2) : RecyclerView.Adapte
         var textViewGeneroPassageiro = itemPassageiro.findViewById<TextView>(R.id.textViewGeneroPassageiro)
         var textViewIdadePassageiro = itemPassageiro.findViewById<TextView>(R.id.textViewIdadePassageiro)
 
+        init {
+            itemPassageiro.setOnClickListener(this)
+        }
 
         var passageiro : Passageiro? = null
             get() = field
@@ -35,9 +37,7 @@ class AdapterPassageiro(val fragment: PassageiroFragment2) : RecyclerView.Adapte
                 textViewIdadePassageiro.text = passageiro?.idade.toString()
         }
 
-        init {
-            itemPassageiro.setOnClickListener(this)
-        }
+
 
         override fun onClick(v: View?) {
             viewHolderSelecionado?.desseleciona()
@@ -57,8 +57,8 @@ class AdapterPassageiro(val fragment: PassageiroFragment2) : RecyclerView.Adapte
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderPassageiro {
-        val view = LayoutInflater.from(parent.context)
-        return ViewHolderPassageiro(view.inflate(R.layout.item_passageiro, parent, false))
+        val itemPassageiro = fragment.layoutInflater.inflate(R.layout.item_passageiro, parent, false)
+        return ViewHolderPassageiro(itemPassageiro)
     }
 
     override fun onBindViewHolder(holder: ViewHolderPassageiro, position: Int) {
