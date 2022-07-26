@@ -4,11 +4,9 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SimpleCursorAdapter
-import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
@@ -75,15 +73,15 @@ class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor
           intArrayOf(android.R.id.text1),
           0
         )
-        binding.spinnerPassageiro.adapter = adapterPassageiro
+
 
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
-        binding.spinnerPassageiro.adapter = null
+        //binding.spinnerPassageiro.adapter = null
     }
 
-    fun processaOpcaoMenu(item: MenuItem) : Boolean =
+    /*fun processaOpcaoMenu(item: MenuItem) : Boolean =
        when(item.itemId){
            R.id.action_guardar -> {
                guardar()
@@ -94,7 +92,7 @@ class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor
                true
            }
            else -> false
-       }
+       }*/
 
     private fun guardar(){
         val nomeLista = binding.editTextNomeLista.text.toString()
@@ -139,10 +137,10 @@ class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor
             return
         }
 
-        val idPassageiro = binding.spinnerPassageiro.selectedItemId
-        if(idPassageiro == Spinner.INVALID_ROW_ID){
-            binding.textViewPassageiro.error = "Escolha um passageiro"
-            binding.spinnerPassageiro.requestFocus()
+        val nomePassageiro = binding.editTextPassageiro.text.toString()
+        if(nomePassageiro.isBlank()){
+            binding.textViewPassageiro.error = "Preencha o campo Nome do passageiro"
+            binding.textViewPassageiro.requestFocus()
             return
         }
 
@@ -160,14 +158,53 @@ class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor
             return
         }
 
+        val localPartida = binding.editTextLocalPartida.text.toString()
+        if (localPartida.isBlank()){
+            binding.editTextLocalPartida.error = "Preencha o campo local partida"
+            binding.editTextLocalPartida.requestFocus()
+            return
+        }
 
 
-        val viagemGuardada =
+        val localChegada = binding.editTextLocalChegada.text.toString()
+        if (localChegada.isBlank()){
+            binding.editTextLocalChegada.error = "Preencha o campo Local Chegada"
+            binding.editTextLocalChegada.requestFocus()
+            return
+        }
+        val DataPartida = binding.editTextDataIda.text.toString()
+        if (DataPartida.isBlank()){
+            binding.editTextDataIda.error = "Preencha o campo Data de Partida"
+            binding.editTextDataIda.requestFocus()
+            return
+        }
+        val DataChegada = binding.editTextDateChegada.text.toString()
+        if (DataChegada.isBlank()){
+            binding.editTextDateChegada.error = "Preencha o campo Data de Chegada"
+            binding.editTextDateChegada.requestFocus()
+            return
+        }
+        val classViagem = binding.editTextClass.text.toString()
+        if (classViagem.isBlank()){
+            binding.editTextClass.error = "Preencha o campo Class"
+            binding.editTextClass.requestFocus()
+            return
+        }
+        val mala = binding.editTextMala.text.toString()
+        if (mala.isBlank()){
+            binding.editTextMala.error = "Preencha o campo Tipo de Mala"
+            binding.editTextMala.requestFocus()
+            return
+        }
+
+
+
+        /*val viagemGuardada =
             if(viagem == null){
-                //inserirViagem(nomeLista, Roupa, acessorios, eletronicos, higiene, calcado, idPassageiro, genero, idade, )
+                inserirViagem(nomeLista, Roupa, acessorios, eletronicos, higiene, calcado, Passageiro(nomePassageiro, genero, idade.toLong()), DataPartida, DataChegada, localPartida, localChegada, classViagem, mala)
             }else{
-                //alterarViagem(nomeLista, Roupa, acessorios, eletronicos, higiene, calcado, idPassageiro, genero, idade, )
-            }
+                alterarViagem(nomeLista, Roupa, acessorios, eletronicos, higiene, calcado, nomePassageiro, genero, idade.toLong(), DataPartida, DataChegada, localPartida, localChegada, classViagem, mala)
+            }*/
     }
 
     private fun alterarViagem(
@@ -177,11 +214,9 @@ class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor
         eletronicos: String,
         higiene: String,
         calcado: String,
-        idPassageiro: Long,
         nomePassageiro: String,
         generoPassageiro: String,
         idadePassageiro: Long,
-        idInfoViagemBilhete: Long,
         dataInicio: String,
         dataFim: String,
         localOrigem: String,
@@ -198,12 +233,10 @@ class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor
                 higiene,
                 calcado,
                 Passageiro(
-                    id = idPassageiro,
                     nome = nomePassageiro,
                     genero = generoPassageiro,
                     idade = idadePassageiro),
                 InfoViagemBilhete(
-                    id = idInfoViagemBilhete,
                     dataFim = dataFim,
                     dataInicio = dataInicio,
                     localDestino = localDestino,
@@ -228,11 +261,9 @@ class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor
         eletronicos: String,
         higiene: String,
         calcado: String,
-        idPassageiro: Long,
         nomePassageiro: String,
         generoPassageiro: String,
         idadePassageiro: Long,
-        idInfoViagemBilhete: Long,
         dataInicio: String,
         dataFim: String,
         localOrigem: String,
@@ -248,12 +279,10 @@ class EditarInfoViagemFragment :Fragment(), LoaderManager.LoaderCallbacks<Cursor
             higiene,
             calcado,
             Passageiro(
-                id = idPassageiro,
                 nome = nomePassageiro,
                 genero = generoPassageiro,
                 idade = idadePassageiro),
             InfoViagemBilhete(
-                id = idInfoViagemBilhete,
                 dataFim = dataFim,
                 dataInicio = dataInicio,
                 localDestino = localDestino,
