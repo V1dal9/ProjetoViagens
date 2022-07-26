@@ -17,7 +17,7 @@ import com.example.projetoprogramacaoavancada.databinding.FragmentListaViagemBin
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
+class ListaVerTudoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     var viagemSelecionada : Lista_Viagem? = null
     get() = field
     set(value){
@@ -86,13 +86,13 @@ class ListaViagemFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     fun processaOpcaoMenu(item: MenuItem) : Boolean =
         when(item.itemId){
             R.id.action_inserir -> {
-                val acao = ListaViagemFragmentDirections.actionListaViagemToEditarViagemFragment()
+                val acao = ListaVerTudoFragmentDirections.actionListaViagemToEditarViagemFragment()
                 findNavController().navigate(acao)
-                (activity as MainActivity).atualizaNome("Inserir Nome")
+                (activity as MainActivity).atualizaNome("Inserir Viagem")
                 true
             }
             R.id.action_edit -> {
-                val acao = ListaViagemFragmentDirections.actionListaViagemToEditarViagemFragment()
+                val acao = ListaVerTudoFragmentDirections.actionListaViagemToEditarViagemFragment()
                 findNavController().navigate(acao)
                 (activity as MainActivity).atualizaNome("Alterar Viagem")
                 true
