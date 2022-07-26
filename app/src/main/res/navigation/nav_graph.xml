@@ -13,17 +13,17 @@
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/ListaViagem" />
+            app:destination="@id/ListaVerTudo" />
         <action
             android:id="@+id/action_MenuInicial_to_passageiroFragment2"
-            app:destination="@id/passageiroFragment2" />
+            app:destination="@id/ListaPassageiroFragment2" />
         <action
             android:id="@+id/action_MenuInicial_to_infoBilheteFragment"
             app:destination="@id/infoBilheteFragment" />
     </fragment>
     <fragment
-        android:id="@+id/ListaViagem"
-        android:name="com.example.projetoprogramacaoavancada.ListaViagemFragment"
+        android:id="@+id/ListaVerTudo"
+        android:name="com.example.projetoprogramacaoavancada.ListaVerTudoFragment"
         android:label="Lista de Viagens"
         tools:layout="@layout/fragment_lista_viagem">
 
@@ -32,15 +32,15 @@
             app:destination="@id/MenuInicial" />
         <action
             android:id="@+id/action_ListaViagem_to_EditarViagemFragment"
-            app:destination="@id/EditarViagemFragment" />
+            app:destination="@id/EditarVerTudoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/EditarViagemFragment"
+        android:id="@+id/EditarVerTudoFragment"
         android:name="com.example.projetoprogramacaoavancada.EditarInfoViagemFragment"
         tools:layout="@layout/fragment_editar_viagem">
         <action
             android:id="@+id/action_EditarViagemFragment_to_ListaViagem"
-            app:destination="@id/ListaViagem" />
+            app:destination="@id/ListaVerTudo" />
     </fragment>
     <fragment
         android:id="@+id/editarPassageirosFragment"
@@ -49,10 +49,11 @@
         tools:layout="@layout/fragment_editar_passageiros" >
         <action
             android:id="@+id/action_editarPassageirosFragment_to_passageiroFragment2"
-            app:destination="@id/passageiroFragment2" />
+            app:destination="@id/ListaPassageiroFragment2" />
+
     </fragment>
     <fragment
-        android:id="@+id/passageiroFragment2"
+        android:id="@+id/ListaPassageiroFragment2"
         android:name="com.example.projetoprogramacaoavancada.PassageiroFragment2"
         android:label="fragment_passageiro2"
         tools:layout="@layout/fragment_passageiro2" >
