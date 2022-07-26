@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class AdapterViagem(val fragment: ListaViagemFragment) : RecyclerView.Adapter<AdapterViagem.ViewHolderViagem>() {
+class AdapterViagem(val fragment: ListaVerTudoFragment) : RecyclerView.Adapter<AdapterViagem.ViewHolderViagem>() {
     var cursor : Cursor? = null
     get() = field
     set(value) {
