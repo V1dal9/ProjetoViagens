@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_lista, menu)
         this.menu = menu
         return true
     }
@@ -60,13 +60,13 @@ class MainActivity : AppCompatActivity() {
 
         if (fragment is MenuInicialFragment) {
             opcaoProcessada = (fragment as MenuInicialFragment).processaOpcaoMenu(item)
-        } else if (fragment is ListaViagemFragment) {
-            opcaoProcessada = (fragment as ListaViagemFragment).processaOpcaoMenu(item)
-        }else if (fragment is EditarInfoViagemFragment) {
-            opcaoProcessada = (fragment as EditarInfoViagemFragment).processaOpcaoMenu(item)
-        }/*else if(fragment is EliminarViagemFragment){
-            opcaoProcessada = (fragment as EliminarViagemFragment).processaOpcaoMenu(item)
-        }*/else {
+        } else if (fragment is ListaVerTudoFragment) {
+            opcaoProcessada = (fragment as ListaVerTudoFragment).processaOpcaoMenu(item)
+        }else if(fragment is EditarPassageirosFragment){
+            opcaoProcessada = (fragment as EditarPassageirosFragment).processaOpcaoMenu(item)
+        }else if(fragment is PassageiroFragment2){
+            opcaoProcessada = (fragment as PassageiroFragment2).processaOpcaoMenu(item)
+        }else {
             opcaoProcessada = false
         }
 
@@ -83,8 +83,11 @@ class MainActivity : AppCompatActivity() {
     fun mostraOpcaoAlterarEliminar(mostra: Boolean){
         menu!!.findItem(R.id.action_edit).setVisible(mostra)
         menu!!.findItem(R.id.action_eliminar).setVisible(mostra)
+
     }
     fun atualizaNome(id_string_nome: String){
         binding.toolbar.setTitle(id_string_nome)
     }
+
+
 }
