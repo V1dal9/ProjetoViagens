@@ -45,4 +45,5 @@
     <string name="g_nero">Género</string>
     <string name="idade">Idade</string>
     <string name="dados_passageiro">Dados Passageiro</string>
+    <string name="idadeVerTudo">Idade</string>
 </resources>
